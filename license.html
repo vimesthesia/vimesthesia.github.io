@@ -1,0 +1,266 @@
+<html lang="us">
+  <head>
+    <meta charset="utf-8">
+    <title>vimesthesia</title>
+    <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui/jquery-ui.min.js"></script>
+
+    <style>
+
+    @font-face {
+        font-family: menlo;
+        src: url(Menlo-Regular.ttf);
+    }
+    @font-face {
+        font-family: luisserra;
+        src: url(luisserra.ttf);
+    }
+
+span.caret {
+  position: absolute; top: 0.7em; left: -2.15em; float: left; display:block;
+}
+
+span.contain {
+  position: relative;
+}
+
+span.letter {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+}
+
+nomar {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  cursor:default;
+}
+
+cell {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  cursor:default;
+}
+
+span.inert {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+}
+
+span.highlight {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+  text-decoration: none;
+  border-bottom: 2px solid #BBBBBB;
+  padding-bottom: 5px;
+  color: #BBBBB;
+}
+
+span.hover {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+}
+
+span.selected {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+  text-decoration: none;
+  border-bottom: 4px solid #BBBBBB;
+  padding-bottom: 4px;
+  color: #BBBBB;
+}
+
+a.nav1:link,
+a.nav1:visited {
+cursor:default;
+  font-family: menlo;
+  display: block;
+  font-size: 24px;
+  color: #919191;
+  border-color: #f2f2f2;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+  width: 120px;
+  margin: 1px 2px;
+  padding: 5px 5px;
+}
+
+a.nav1:active,
+a.nav1:hover {
+cursor:default;
+  font-family: menlo;
+  display: block;
+  font-size: 24px;
+  color: #f2f2f2;
+  border-color: #919191;
+  border-radius: 5px;
+  background-color: #919191;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+  width: 120px;
+  margin: 1px 2px;
+  padding: 5px 5px;
+}
+
+    a {
+        text-decoration: none;
+        border-bottom: 2px solid #BBBBBB;
+        padding-bottom: 2px;
+        color: #BBBBB;
+    }
+    a:link {
+        text-decoration: none;
+        border-bottom: 2px solid #BBBBBB;
+        padding-bottom: 1px;
+        color: #BBBBBB;
+    }
+    a:hover {
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 3px solid #BBBBBB;
+        color: #BBBBBB;
+        padding-bottom: 1px;
+    }
+    a:visited {
+        text-decoration: none;
+        border-bottom: 3px solid #BBBBBB;
+        color: #BBBBBB;
+        padding-bottom: 1px;
+    }
+
+    body {
+    cursor:default;
+        font-family: menlo;
+        margin: 50px;
+        color: #BBBBBB;
+        background-color: #040404;
+        margin-left: 85px;
+        line-height: 1.75;
+        display: none;
+          -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+    }
+    .demoHeaders {
+    cursor:default;
+        margin-top: 2em;
+    }
+    #dialog-link {
+    cursor:default;
+        padding: .4em 1em .4em 20px;
+        text-decoration: none;
+        position: relative;
+    }
+    #dialog-link span.ui-icon {
+    cursor:default;
+        margin: 0 5px 0 0;
+        position: absolute;
+        left: .2em;
+        top: 50%;
+        margin-top: -8px;
+    }
+    #icons {
+    cursor:default;
+        margin: 0;
+        padding: 0;
+    }
+    #icons li {
+    cursor:default;
+        margin: 2px;
+        position: relative;
+        padding: 4px 0;
+        cursor: pointer;
+        float: left;
+        list-style: none;
+    }
+    #icons span.ui-icon {
+    cursor:default;
+        float: left;
+        margin: 0 4px;
+    }
+    .fakewindowcontain .ui-widget-overlay {
+    cursor:default;
+        position: absolute;
+    }
+    select {
+    cursor:default;
+        width: 200px;
+    }
+    hr {
+    cursor:default;
+        border-style:solid;
+        border-color:#444444;
+        color:#444444;
+    }
+    h2 {
+    cursor:default;
+      margin-bottom: 1em;
+    }
+    p {
+    cursor:default;
+      text-indent: 25px;
+    }
+    </style>
+  </head>
+  <body style="max-width: 1000px;">
+    <h1>vimesthesia</h1>
+    <hr>
+    <div>
+      Copyright (c) 2017, mathpunk. All rights reserved.
+    </div>
+    <br>
+    <div>
+      Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+    </div>
+<ul>
+  <li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+  <li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+</ul>
+<div>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</div>
+    <hr>
+    <div style="margin-top: 2em;">
+<a href="/">BACK</a>
+</div>
+  <script>
+    $(document).ready(function() {
+      $("body").fadeIn(150);
+    });
+  </script>
+  </body>
+</html>
