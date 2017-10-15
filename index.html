@@ -1,0 +1,2322 @@
+<html lang="us">
+  <head>
+    <meta charset="utf-8">
+    <title>Vimesthesia</title>
+    <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui/jquery-ui.min.js"></script>
+
+    <style>
+
+
+    @font-face {
+        font-family: menlo;
+        src: url(Menlo-Regular.ttf);
+    }
+    @font-face {
+        font-family: luisserra;
+        src: url(luisserra.ttf);
+    }
+
+    .refs {
+      font-size: 95%;
+    }
+
+    code {
+      font-size: 120%;
+    }
+
+    pre {
+      font-size: 120%;
+    }
+
+span.contain {
+  position: relative;
+}
+
+span.letter {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+}
+
+td.passive {
+  border-bottom: 2px solid #fafafaf;
+}
+
+nomar {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  table-layout: fixed;
+  pading: 0px;
+  border: 0px;
+  cursor:default;
+}
+
+.middle {}
+
+.cell {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  pading: 0px;
+  width: 12px;
+  height: 12px;
+  border: 0px;
+  cursor:default;
+}
+
+span.inert {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+}
+
+span.highlight {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+  text-decoration: none;
+  border-bottom: 2px solid #BBBBBB;
+  padding-bottom: 8px;
+  /*color: #BBBBB;*/
+}
+
+span.hover {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+}
+
+span.selected {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  cursor:default;
+  text-decoration: none;
+  border-bottom: 4px solid #BBBBBB;
+  padding-bottom: 7px;
+  /*color: #BBBBB;*/
+}
+
+a.nav1:link,
+a.nav1:visited {
+cursor:default;
+  font-family: menlo;
+  display: block;
+  font-size: 24px;
+  color: #919191;
+  border-color: #f2f2f2;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+        font-weight: normal;
+  width: 120px;
+  margin: 1px 2px;
+  padding: 5px 5px;
+}
+
+a.nav1:active,
+a.nav1:hover {
+cursor:default;
+  font-family: menlo;
+  display: block;
+  font-size: 24px;
+  color: #f2f2f2;
+  border-color: #919191;
+  border-radius: 5px;
+  background-color: #919191;
+        font-weight: normal;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+  width: 120px;
+  margin: 1px 2px;
+  padding: 5px 5px;
+}
+
+    a {
+        text-decoration: none;
+        border-bottom: 2px solid #BBBBBB;
+        padding-bottom: 2px;
+        color: #BBBBB;
+    }
+    a:link {
+        text-decoration: none;
+        border-bottom: 2px solid #BBBBBB;
+        padding-bottom: 1px;
+        color: #BBBBBB;
+    }
+    a:hover {
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 3px solid #BBBBBB;
+        color: #BBBBBB;
+        padding-bottom: 1px;
+    }
+    a:visited {
+        text-decoration: none;
+        border-bottom: 3px solid #BBBBBB;
+        color: #BBBBBB;
+        padding-bottom: 1px;
+    }
+
+    body {
+    cursor:default;
+        font-family: menlo;
+        margin: 50px;
+        color: #BBBBBB;
+        background-color: #040404;
+        margin-left: 85px;
+        line-height: 1.75;
+        display: none;
+        /* -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; */
+    }
+    .demoHeaders {
+    cursor:default;
+        margin-top: 2em;
+    }
+    #dialog-link {
+    cursor:default;
+        padding: .4em 1em .4em 20px;
+        text-decoration: none;
+        position: relative;
+    }
+    #dialog-link span.ui-icon {
+    cursor:default;
+        margin: 0 5px 0 0;
+        position: absolute;
+        left: .2em;
+        top: 50%;
+        margin-top: -8px;
+    }
+    #icons {
+    cursor:default;
+        margin: 0;
+        padding: 0;
+    }
+    #icons li {
+    cursor:default;
+        margin: 2px;
+        position: relative;
+        padding: 4px 0;
+        cursor: pointer;
+        float: left;
+        list-style: none;
+    }
+    #icons span.ui-icon {
+    cursor:default;
+        float: left;
+        margin: 0 4px;
+    }
+    .fakewindowcontain .ui-widget-overlay {
+    cursor:default;
+        position: absolute;
+    }
+    select {
+    cursor:default;
+        width: 200px;
+    }
+    hr {
+    cursor:default;
+        border-style:solid;
+        border-color:#444444;
+        color:#444444;
+    }
+    h2 {
+    cursor:default;
+      margin-bottom: 1em;
+    }
+    p {
+    cursor:default;
+      text-indent: 25px;
+    }
+    
+.c0 {
+color: #000000;
+}
+.c1 {
+color: #800000;
+}
+.c2 {
+color: #008000;
+}
+.c3 {
+color: #808000;
+}
+.c4 {
+color: #000080;
+}
+.c5 {
+color: #800080;
+}
+.c6 {
+color: #008080;
+}
+.c7 {
+color: #c0c0c0;
+}
+.c8 {
+color: #808080;
+}
+.c9 {
+color: #ff0000;
+}
+.c10 {
+color: #00ff00;
+}
+.c11 {
+color: #ffff00;
+}
+.c12 {
+color: #0000ff;
+}
+.c13 {
+color: #ff00ff;
+}
+.c14 {
+color: #00ffff;
+}
+.c15 {
+color: #ffffff;
+}
+.c16 {
+color: #000000;
+}
+.c17 {
+color: #00005f;
+}
+.c18 {
+color: #000087;
+}
+.c19 {
+color: #0000af;
+}
+.c20 {
+color: #0000d7;
+}
+.c21 {
+color: #0000ff;
+}
+.c22 {
+color: #005f00;
+}
+.c23 {
+color: #005f5f;
+}
+.c24 {
+color: #005f87;
+}
+.c25 {
+color: #005faf;
+}
+.c26 {
+color: #005fd7;
+}
+.c27 {
+color: #005fff;
+}
+.c28 {
+color: #008700;
+}
+.c29 {
+color: #00875f;
+}
+.c30 {
+color: #008787;
+}
+.c31 {
+color: #0087af;
+}
+.c32 {
+color: #0087d7;
+}
+.c33 {
+color: #0087ff;
+}
+.c34 {
+color: #00af00;
+}
+.c35 {
+color: #00af5f;
+}
+.c36 {
+color: #00af87;
+}
+.c37 {
+color: #00afaf;
+}
+.c38 {
+color: #00afd7;
+}
+.c39 {
+color: #00afff;
+}
+.c40 {
+color: #00d700;
+}
+.c41 {
+color: #00d75f;
+}
+.c42 {
+color: #00d787;
+}
+.c43 {
+color: #00d7af;
+}
+.c44 {
+color: #00d7d7;
+}
+.c45 {
+color: #00d7ff;
+}
+.c46 {
+color: #00ff00;
+}
+.c47 {
+color: #00ff5f;
+}
+.c48 {
+color: #00ff87;
+}
+.c49 {
+color: #00ffaf;
+}
+.c50 {
+color: #00ffd7;
+}
+.c51 {
+color: #00ffff;
+}
+.c52 {
+color: #5f0000;
+}
+.c53 {
+color: #5f005f;
+}
+.c54 {
+color: #5f0087;
+}
+.c55 {
+color: #5f00af;
+}
+.c56 {
+color: #5f00d7;
+}
+.c57 {
+color: #5f00ff;
+}
+.c58 {
+color: #5f5f00;
+}
+.c59 {
+color: #5f5f5f;
+}
+.c60 {
+color: #5f5f87;
+}
+.c61 {
+color: #5f5faf;
+}
+.c62 {
+color: #5f5fd7;
+}
+.c63 {
+color: #5f5fff;
+}
+.c64 {
+color: #5f8700;
+}
+.c65 {
+color: #5f875f;
+}
+.c66 {
+color: #5f8787;
+}
+.c67 {
+color: #5f87af;
+}
+.c68 {
+color: #5f87d7;
+}
+.c69 {
+color: #5f87ff;
+}
+.c70 {
+color: #5faf00;
+}
+.c71 {
+color: #5faf5f;
+}
+.c72 {
+color: #5faf87;
+}
+.c73 {
+color: #5fafaf;
+}
+.c74 {
+color: #5fafd7;
+}
+.c75 {
+color: #5fafff;
+}
+.c76 {
+color: #5fd700;
+}
+.c77 {
+color: #5fd75f;
+}
+.c78 {
+color: #5fd787;
+}
+.c79 {
+color: #5fd7af;
+}
+.c80 {
+color: #5fd7d7;
+}
+.c81 {
+color: #5fd7ff;
+}
+.c82 {
+color: #5fff00;
+}
+.c83 {
+color: #5fff5f;
+}
+.c84 {
+color: #5fff87;
+}
+.c85 {
+color: #5fffaf;
+}
+.c86 {
+color: #5fffd7;
+}
+.c87 {
+color: #5fffff;
+}
+.c88 {
+color: #870000;
+}
+.c89 {
+color: #87005f;
+}
+.c90 {
+color: #870087;
+}
+.c91 {
+color: #8700af;
+}
+.c92 {
+color: #8700d7;
+}
+.c93 {
+color: #8700ff;
+}
+.c94 {
+color: #875f00;
+}
+.c95 {
+color: #875f5f;
+}
+.c96 {
+color: #875f87;
+}
+.c97 {
+color: #875faf;
+}
+.c98 {
+color: #875fd7;
+}
+.c99 {
+color: #875fff;
+}
+.c100 {
+color: #878700;
+}
+.c101 {
+color: #87875f;
+}
+.c102 {
+color: #878787;
+}
+.c103 {
+color: #8787af;
+}
+.c104 {
+color: #8787d7;
+}
+.c105 {
+color: #8787ff;
+}
+.c106 {
+color: #87af00;
+}
+.c107 {
+color: #87af5f;
+}
+.c108 {
+color: #87af87;
+}
+.c109 {
+color: #87afaf;
+}
+.c110 {
+color: #87afd7;
+}
+.c111 {
+color: #87afff;
+}
+.c112 {
+color: #87d700;
+}
+.c113 {
+color: #87d75f;
+}
+.c114 {
+color: #87d787;
+}
+.c115 {
+color: #87d7af;
+}
+.c116 {
+color: #87d7d7;
+}
+.c117 {
+color: #87d7ff;
+}
+.c118 {
+color: #87ff00;
+}
+.c119 {
+color: #87ff5f;
+}
+.c120 {
+color: #87ff87;
+}
+.c121 {
+color: #87ffaf;
+}
+.c122 {
+color: #87ffd7;
+}
+.c123 {
+color: #87ffff;
+}
+.c124 {
+color: #af0000;
+}
+.c125 {
+color: #af005f;
+}
+.c126 {
+color: #af0087;
+}
+.c127 {
+color: #af00af;
+}
+.c128 {
+color: #af00d7;
+}
+.c129 {
+color: #af00ff;
+}
+.c130 {
+color: #af5f00;
+}
+.c131 {
+color: #af5f5f;
+}
+.c132 {
+color: #af5f87;
+}
+.c133 {
+color: #af5faf;
+}
+.c134 {
+color: #af5fd7;
+}
+.c135 {
+color: #af5fff;
+}
+.c136 {
+color: #af8700;
+}
+.c137 {
+color: #af875f;
+}
+.c138 {
+color: #af8787;
+}
+.c139 {
+color: #af87af;
+}
+.c140 {
+color: #af87d7;
+}
+.c141 {
+color: #af87ff;
+}
+.c142 {
+color: #afaf00;
+}
+.c143 {
+color: #afaf5f;
+}
+.c144 {
+color: #afaf87;
+}
+.c145 {
+color: #afafaf;
+}
+.c146 {
+color: #afafd7;
+}
+.c147 {
+color: #afafff;
+}
+.c148 {
+color: #afd700;
+}
+.c149 {
+color: #afd75f;
+}
+.c150 {
+color: #afd787;
+}
+.c151 {
+color: #afd7af;
+}
+.c152 {
+color: #afd7d7;
+}
+.c153 {
+color: #afd7ff;
+}
+.c154 {
+color: #afff00;
+}
+.c155 {
+color: #afff5f;
+}
+.c156 {
+color: #afff87;
+}
+.c157 {
+color: #afffaf;
+}
+.c158 {
+color: #afffd7;
+}
+.c159 {
+color: #afffff;
+}
+.c160 {
+color: #d70000;
+}
+.c161 {
+color: #d7005f;
+}
+.c162 {
+color: #d70087;
+}
+.c163 {
+color: #d700af;
+}
+.c164 {
+color: #d700d7;
+}
+.c165 {
+color: #d700ff;
+}
+.c166 {
+color: #d75f00;
+}
+.c167 {
+color: #d75f5f;
+}
+.c168 {
+color: #d75f87;
+}
+.c169 {
+color: #d75faf;
+}
+.c170 {
+color: #d75fd7;
+}
+.c171 {
+color: #d75fff;
+}
+.c172 {
+color: #d78700;
+}
+.c173 {
+color: #d7875f;
+}
+.c174 {
+color: #d78787;
+}
+.c175 {
+color: #d787af;
+}
+.c176 {
+color: #d787d7;
+}
+.c177 {
+color: #d787ff;
+}
+.c178 {
+color: #d7af00;
+}
+.c179 {
+color: #d7af5f;
+}
+.c180 {
+color: #d7af87;
+}
+.c181 {
+color: #d7afaf;
+}
+.c182 {
+color: #d7afd7;
+}
+.c183 {
+color: #d7afff;
+}
+.c184 {
+color: #d7d700;
+}
+.c185 {
+color: #d7d75f;
+}
+.c186 {
+color: #d7d787;
+}
+.c187 {
+color: #d7d7af;
+}
+.c188 {
+color: #d7d7d7;
+}
+.c189 {
+color: #d7d7ff;
+}
+.c190 {
+color: #d7ff00;
+}
+.c191 {
+color: #d7ff5f;
+}
+.c192 {
+color: #d7ff87;
+}
+.c193 {
+color: #d7ffaf;
+}
+.c194 {
+color: #d7ffd7;
+}
+.c195 {
+color: #d7ffff;
+}
+.c196 {
+color: #ff0000;
+}
+.c197 {
+color: #ff005f;
+}
+.c198 {
+color: #ff0087;
+}
+.c199 {
+color: #ff00af;
+}
+.c200 {
+color: #ff00d7;
+}
+.c201 {
+color: #ff00ff;
+}
+.c202 {
+color: #ff5f00;
+}
+.c203 {
+color: #ff5f5f;
+}
+.c204 {
+color: #ff5f87;
+}
+.c205 {
+color: #ff5faf;
+}
+.c206 {
+color: #ff5fd7;
+}
+.c207 {
+color: #ff5fff;
+}
+.c208 {
+color: #ff8700;
+}
+.c209 {
+color: #ff875f;
+}
+.c210 {
+color: #ff8787;
+}
+.c211 {
+color: #ff87af;
+}
+.c212 {
+color: #ff87d7;
+}
+.c213 {
+color: #ff87ff;
+}
+.c214 {
+color: #ffaf00;
+}
+.c215 {
+color: #ffaf5f;
+}
+.c216 {
+color: #ffaf87;
+}
+.c217 {
+color: #ffafaf;
+}
+.c218 {
+color: #ffafd7;
+}
+.c219 {
+color: #ffafff;
+}
+.c220 {
+color: #ffd700;
+}
+.c221 {
+color: #ffd75f;
+}
+.c222 {
+color: #ffd787;
+}
+.c223 {
+color: #ffd7af;
+}
+.c224 {
+color: #ffd7d7;
+}
+.c225 {
+color: #ffd7ff;
+}
+.c226 {
+color: #ffff00;
+}
+.c227 {
+color: #ffff5f;
+}
+.c228 {
+color: #ffff87;
+}
+.c229 {
+color: #ffffaf;
+}
+.c230 {
+color: #ffffd7;
+}
+.c231 {
+color: #ffffff;
+}
+.c232 {
+color: #080808;
+}
+.c233 {
+color: #121212;
+}
+.c234 {
+color: #1c1c1c;
+}
+.c235 {
+color: #262626;
+}
+.c236 {
+color: #303030;
+}
+.c237 {
+color: #3a3a3a;
+}
+.c238 {
+color: #444444;
+}
+.c239 {
+color: #4e4e4e;
+}
+.c240 {
+color: #585858;
+}
+.c241 {
+color: #606060;
+}
+.c242 {
+color: #666666;
+}
+.c243 {
+color: #767676;
+}
+.c244 {
+color: #808080;
+}
+.c245 {
+color: #8a8a8a;
+}
+.c246 {
+color: #949494;
+}
+.c247 {
+color: #9e9e9e;
+}
+.c248 {
+color: #a8a8a8;
+}
+.c249 {
+color: #b2b2b2;
+}
+.c250 {
+color: #bcbcbc;
+}
+.c251 {
+color: #c6c6c6;
+}
+.c252 {
+color: #d0d0d0;
+}
+.c253 {
+color: #dadada;
+}
+.c254 {
+color: #e4e4e4;
+}
+.c255 {
+color: #eeeeee;
+}
+    </style>
+    <script>
+      var i1;
+      var i2;
+      var alph;
+      var ALPH;
+      var nums;
+
+      function b2s(a) {
+        var result = "";
+        for(var i = 0; i < a.length; ++i){
+          result+= (String.fromCharCode(a[i]));
+        }
+        return result;
+      }
+
+      function getfile(data, filename, type) {
+        var file = new Blob([data], {type: type});
+        if (window.navigator.msSaveOrOpenBlob) // IE10+
+          window.navigator.msSaveOrOpenBlob(file, filename);
+        else { // Others
+          var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url); }, 0); 
+        }
+      }
+
+      function pad(t) {
+        var st = "" + t;
+        while (st.length < 2)
+          st = "0" + st;
+        return st;  
+      }
+
+      function save2() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+          dd='0'+dd;
+        }
+
+        if(mm<10){
+          mm='0'+mm;
+        }
+
+        var syntax = "";
+
+        for (var i = 0; i < 26; i++) {
+          if (selections[i] >= 0) {
+            syntax += "highlight SYN_";
+            syntax += ALPH[i];
+            syntax += " ctermfg=";
+            syntax += selections[i].toString();
+            syntax += "\n";
+            syntax += "syn match SYN_";
+            syntax += ALPH[i];
+            syntax += " /";
+            syntax += alph[i];
+            syntax += "/\n";
+            syntax += "syn match SYN_";
+            syntax += ALPH[i];
+            syntax += " /";
+            syntax += ALPH[i];
+            syntax += "/\n";
+          }
+        }
+
+        for (var i = 26; i < 36; i++) {
+          if (selections[i] >= 0) {
+            syntax += "highlight SYN_";
+            syntax += nums[i-26];
+            syntax += " ctermfg=";
+            syntax += selections[i].toString();
+            syntax += "\n";
+            syntax += "syn match SYN_";
+            syntax += nums[i-26];
+            syntax += " /";
+            syntax += nums[i-26];
+            syntax += "/\n";
+          }
+        }
+
+        hh = pad(today.getHours());
+        zz = pad(today.getMinutes());
+        var name = 'vimesthesia-' + yyyy+':'+mm+':'+dd+'-'+hh+':'+zz + '.vim';
+        getfile(syntax, name, 'text/plain');
+      }
+
+      function save() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+          dd='0'+dd;
+        }
+
+        if(mm<10){
+          mm='0'+mm;
+        }
+
+        var syntax = "";
+
+        for (var i = 0; i < 26; i++) {
+          if (selections[i] >= 0) {
+            syntax += "highlight SYN_";
+            syntax += ALPH[i];
+            syntax += " ctermfg=";
+            syntax += selections[i].toString();
+            syntax += "\n";
+            syntax += "syn match SYN_";
+            syntax += ALPH[i];
+            syntax += " /";
+            syntax += alph[i];
+            syntax += "/\n";
+            syntax += "syn match SYN_";
+            syntax += ALPH[i];
+            syntax += " /";
+            syntax += ALPH[i];
+            syntax += "/\n";
+          }
+        }
+
+        for (var i = 26; i < 36; i++) {
+          if (selections[i] >= 0) {
+            syntax += "highlight SYN_";
+            syntax += nums[i-26];
+            syntax += " ctermfg=";
+            syntax += selections[i].toString();
+            syntax += "\n";
+            syntax += "syn match SYN_";
+            syntax += nums[i-26];
+            syntax += " /";
+            syntax += nums[i-26];
+            syntax += "/\n";
+          }
+        }
+
+        hh = pad(today.getHours());
+        zz = pad(today.getMinutes());
+        var name = 'install-vimesthesia-' + yyyy+':'+mm+':'+dd+'-'+hh+':'+zz + '.sh';
+        getfile(i1 + syntax + i2, name, 'application/x-sh');
+      }
+
+      function cookie_add(name, value) {
+	var expires = "";
+        days = 365 * 25;
+	if (days) {
+	  var date = new Date();
+	  date.setTime(date.getTime() + (days*24*60*60*1000));
+	  expires = "; expires=" + date.toUTCString();
+	}
+	document.cookie = name + "=" + value + expires + "; path=/";
+      }
+
+      function cookie_del(name) {
+        cookie_add(name, "");
+      }
+
+      function cookie_get(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return "";
+      }
+
+      function cycle() {
+        pangram = (pangram + 1) % 5;
+        $("#pangram").html(pangrams[pangram]);
+        $("#clean").html(clean[pangram]);
+
+        for (var i = 0; i < 36; i++) {
+          if (selections[i] >= 0) {
+            var s = "l" + i.toString();
+            var c = "c" + selections[i].toString();
+            $('.letter').each(function(i, obj) {
+            //  var classList = $(obj).attr('class').split(/\s+/);
+            //  for (var j = 0; j < classList.length; j++) {
+            //    var cc = classList[j];
+            //    if (cc.length > 0) {
+            //      if (cc.charAt(0) == 'c') {
+            //        $(obj).removeClass(cc);
+            //      }
+            //    }
+            //  }
+
+              if (hasClass(obj, s)) {
+                $(obj).addClass(c);
+              }
+            });
+          }
+        }
+
+        var s = "l" + selected.toString();
+        $('.letter').each(function(j, obj) {
+          if (hasClass(obj, s)) {
+            if (!hasClass(obj, "selected")) {
+              $(obj).addClass("selected");
+            }
+          } 
+        });
+        return false;
+      }
+
+      function reset() {
+        $('.letter').each(function(j, obj) {
+          var classList = $(obj).attr('class').split(/\s+/);
+          for (var i = 0; i < classList.length; i++) {
+            var cc = classList[i];
+            if (cc.length > 0) {
+              if (cc.charAt(0) == 'c') {
+                $(obj).removeClass(cc);
+              }
+            }
+          }
+        });
+
+        selected = -1;
+        inside = 0;
+        selecting = 0;
+        for (var i = 0; i < 36; i++) {
+          selections[i] = -1;
+          cookie_del(i.toString());
+        }
+        return false;
+      }
+
+      function hasClass(element, cls) {
+        return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+      }
+      
+      var inside = 0;
+      function bodyOver() {
+        inside = 0;
+        $('.letter').each(function(i, obj) {
+          if (hasClass(obj, "highlight")) {
+            $(obj).removeClass("highlight");
+          }
+        });
+      }
+      
+      var selecting = 0;
+      
+      function colorLeave() {
+        inside = 0;
+      }
+      
+      function colorEnter() {
+        inside = 1;
+      }
+
+      function elementEnter() {
+        inside = 1;
+      }
+
+      function elementOver(which) {
+          var s = "l" + which.toString();
+        $('.letter').each(function(i, obj) {
+          if (hasClass(obj, s) && !hasClass(obj, "selected")) {
+            if (!hasClass(obj, "highlight")) {
+              $(obj).addClass("highlight");
+            }
+          } else if (!hasClass(obj, "selected")) {
+            if (hasClass(obj, "highlight")) {
+              $(obj).removeClass("highlight");
+            }
+          }
+        });
+      }
+
+      function bodyDown() {
+        if (inside == 0) {
+          selected = -1;
+          $('.letter').each(function(i, obj) {
+            if (hasClass(obj, "selected")) {
+              $(obj).removeClass("selected");
+            }
+
+            if (hasClass(obj, "highlight")) {
+              $(obj).removeClass("highlight");
+            }
+          });
+        }
+      }
+
+      var selected = -1;
+      var pangram = 0;
+      function elementDown(which) {
+        var s = "l" + which.toString();
+        selected = which;
+        $('.letter').each(function(i, obj) {
+          if (hasClass(obj, s)) {
+            if (!hasClass(obj, "selected")) {
+              $(obj).addClass("selected");
+            }
+          } else {
+            if (hasClass(obj, "highlight")) {
+              $(obj).removeClass("highlight");
+            }
+
+            if (hasClass(obj, "selected")) {
+              $(obj).removeClass("selected");
+            }
+          }
+        });
+      }
+
+      function colourOver(which) {
+        if (selecting == 0) {
+          return;
+        }
+
+        if (selected >= 0) {
+          selections[selected] = which;
+          var s = "l" + selected.toString();
+          var c = "c" + which.toString();
+          $('.letter').each(function(i, obj) {
+            if (hasClass(obj, s)) {
+              var classList = $(obj).attr('class').split(/\s+/);
+              for (var i = 0; i < classList.length; i++) {
+                var cc = classList[i];
+                if (cc.length > 0) {
+                  if (cc.charAt(0) == 'c') {
+                    $(obj).removeClass(cc);
+                  }
+                }
+              }
+
+              $(obj).addClass(c);
+              cookie_add(selected.toString(), which.toString());
+            }
+          });
+        }
+      }
+
+      function colourDown(which) {
+        selecting = 1;
+        colourOver(which);
+      }
+
+    </script>
+  </head>
+  <body style="max-width: 1000px;" onmouseup="$('#nav').css('color', '');$('#nav2').css('color', '');selecting=0;return false;" onmousedown="bodyDown(); return true;">
+    <h1>Vimesthesia</h1>
+    <hr>
+    <h2>Make the &lsquo;vim&rsquo; editor match the colours of your synesthesia.</h2>
+    <p>
+    <a href="" onclick="return false;">Vimesthesia</a> is a highlight file for the <a href="http://www.vim.org">vim</a> text editor designed to enhance the abilities of people with synesthesia. 
+    </p>
+    <p>
+    One of the most common forms of synesthesia is grapheme/colour [<a href="#1">1</a>]: each letter appears with a specific colour, in a more-or-less context independent way [<a href="#2">2</a>]. Studies suggest that if text is presented such that the colour of each letter is tuned to match your experience then the speed at which you read, and the strength of your memory of the text could improve [<a href="#1">1</a>].
+    </p>
+    <p>
+    Try it out with these three steps:
+    </p>
+    <h2 style="text-indent: -25px"> 1. Create</h2>
+    <p>
+      Click on the graphemes in the first copy of the pangram, and then tune <a href="" onclick="return false;">Vimesthesia</a> by choosing the colour that most closely matches your experience. The second copy of the pangram is provided for reference (it&rsquo;s not physically coloured). You can cycle through pangrams by clicking the &lsquo;<large>cycle</large></tt>&rsquo; button. If you want to start this step again from scratch, click the &lsquo;<large>reset</large></tt>&rsquo; button.
+      <br>
+      <br>
+      <table style="margin-left: 50px;">
+        <tr>
+          <td valign="middle">
+            <a class="nav1" id="nav" href="" onmousedown="$('#nav').css('color', '#c0c0c0');" onmouseenter="inside=1;" onmouseleave="inside=0;" onclick="return cycle();" ondragstart = "return false;">Cycle</a>
+          </td>
+          <td>
+            <div id="pangram" style="margin-left: 10px; line-height: 2;">
+            </div>
+            <br>
+            <div id="clean" style="margin-left: 10px; line-height: 2;">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="middle">
+            <a style="margin-top: 2em;" class="nav1" id="nav2" href="" onmousedown="$('#nav2').css('color', '#c0c0c0');" onclick="return reset();" ondragstart = "return false;">Reset</a>
+          </td>
+          <td>
+            <div id="middle" style="text-indent: 0px; margin-left: 10px; padding-left: 18px; margin-top: 2.9em;">
+              
+            </div>
+          </td>
+        </tr>
+      </table>
+    </p>
+    <h2 style="text-indent: -25px; margin-top: 2em;"> 2. Download</h2>
+      <p>
+        Click <a href="" onclick="save(); return false;">here</a> to download a <a href="" onclick="return false;">Vimesthesia</a> install script for the highlights that you created in the previous step.
+      </p>
+    <h2 style="text-indent: -25px"> 3. Install</h2>
+    <p style="margin-bottom: 2em;">
+      To install <a href="" onclick="return false;">Vimesthesia</a>, run the script you downloaded in the previous step. To run the install script, enter the command &lsquo;<code id="install1">sh ~/Downloads/install-vimesthesia-YYYY_MM_DD-hh_mm.sh</code>&rsquo; into your terminal, where &lsquo;<code>~/Downloads</code>&rsquo; is the directory that you saved the install script to, and &lsquo;<code>YYYY_MM_DD-hh_mm</code>&rsquo; is the date and time at which you downloaded the install script (the install script is named after the download date and time so that you can keep track of any modifications you make to your colour choices).
+    </p>
+    <p>The install script will append the following lines to your <code>~/.vimrc</code> file if they aren&rsquo;t already present:
+      <pre style="margin-top: -5px; margin-bottom: -10px; margin-left:50px">syntax on                                    " Added by Vimesthesia
+function Vimesthesia()                       " Added by Vimesthesia
+  silent set t_Co=256                        " Added by Vimesthesia
+  silent set syntax=vimesthesia              " Added by Vimesthesia
+endfunction                                  " Added by Vimesthesia
+autocmd BufEnter * silent call Vimesthesia() " Added by Vimesthesia
+      </pre>
+    </p>
+    <p>
+      The install script will also save the colours you chose in the first step to the highlight file <code>~/.vim/syntax/vimesthesia.vim</code>. If you&rsquo;d rather just download the highlight file on its own, it&rsquo;s <a href="" onclick="save2(); return false;">here</a>.
+    </p>
+    <p>
+      If you want to make a modification to the colours you&rsquo;ve chosen, just repeat these three steps and the new install script will overwrite the old one.
+    </p>
+    <p>
+      To uninstall <a href="" onclick="return false;">Vimesthesia</a>, remove the above lines from your <code>~/.vimrc</code> file and remove the file <code>~/.vim/syntax/vimesthesia.vim</code>. You can also uninstall <a href="" onclick="return false;">Vimesthesia</a> by downloading and running the uninstall script <a href="uninstall.sh" download>here</a>.
+    </p>
+    <hr>
+    <!--h3>Acknowledgements</h3>
+    <p>
+      Special thanks to Julie, x, y, Saara and Tamara.
+    </p-->
+    <h3>References</h3>
+    <p class="refs">
+      <a name="1"></a>V. Niccolai, J. Jennes, P. Stoerig, T.M. Van Leeuwen. <em>Modality and variability of synesthetic experience.</em> 2012. American Journal of Psychology. 125(1).
+    </p>
+    <p class="refs">
+      <a name="2"></a>J. Simner, E. M. Hubbard. <em>The Oxford Handbook of Synesthesia.</em> 2014. Oxford University Press.
+    </p>
+    <!--h3>Version</h3>
+    <p>
+      This is <a href="" onclick="return false;">Vimesthesia</a> version 1.0. Tested on
+    </p-->
+    <h3>License</h3>
+    <p>
+      <a href="" onclick="return false;">Vimesthesia</a> is made available under the <a href="license.html">BSD 2 clause license</a>. Like <a href="http://www.vim.org/">vim</a>, <a href="" onclick="return false;">Vimesthesia</a> is charityware.  You can use and copy it as much as you like, but you are encouraged to make a donation for needy children in Uganda. Visit the ICCF web sites for more detail, available at these URLs:<div style="margin-top: -1em;">
+    <ul>
+      <li><a href="http://iccf-holland.org/">http://iccf-holland.org/</a></li>
+      <li><a href="http://www.vim.org/iccf/">http://www.vim.org/iccf/</a></li>
+      <li><a href="http://www.iccf.nl/">http://www.iccf.nl/</a></li>
+    </ul></div>
+    </p>
+    <!--h3>Source</h3>
+    <p>
+      Source code for <a href="" onclick="return false;">Vimesthesia</a> is available <a href="">here</a>.
+    </p-->
+    <p style="font-family: luisserra; float: right; margin-right: 25px;">by Mathpunk</p>
+  <script>
+    var colours = new Array();
+    var classes = new Array();
+    var selections = new Array();
+
+    var pangrams = new Array();
+    var clean = new Array();
+
+    $(document).ready(function() {
+      for (var i = 0; i < 36; i++) {
+        selections[i] = -1;
+      }
+$("#middle").html("<span onmouseenter='colorEnter();' onmouseleave='colorLeave();'><span class='cell' style='color: #800000; background-color: #800000;'><img onmousedown='colourDown(1);' src='square.png' width=12 height=12 onmouseover='colourOver(1);'></span><span class='cell' style='color: #008000; background-color: #008000;'><img onmousedown='colourDown(2);' src='square.png' width=12 height=12 onmouseover='colourOver(2);'></span><span class='cell' style='color: #808000; background-color: #808000;'><img onmousedown='colourDown(3);' src='square.png' width=12 height=12 onmouseover='colourOver(3);'></span><span class='cell' style='color: #000080; background-color: #000080;'><img onmousedown='colourDown(4);' src='square.png' width=12 height=12 onmouseover='colourOver(4);'></span><span class='cell' style='color: #800080; background-color: #800080;'><img onmousedown='colourDown(5);' src='square.png' width=12 height=12 onmouseover='colourOver(5);'></span><span class='cell' style='color: #008080; background-color: #008080;'><img onmousedown='colourDown(6);' src='square.png' width=12 height=12 onmouseover='colourOver(6);'></span><span class='cell' style='color: #c0c0c0; background-color: #c0c0c0;'><img onmousedown='colourDown(7);' src='square.png' width=12 height=12 onmouseover='colourOver(7);'></span><span class='cell' style='color: #808080; background-color: #808080;'><img onmousedown='colourDown(8);' src='square.png' width=12 height=12 onmouseover='colourOver(8);'></span><span class='cell' style='color: #ff0000; background-color: #ff0000;'><img onmousedown='colourDown(9);' src='square.png' width=12 height=12 onmouseover='colourOver(9);'></span><span class='cell' style='color: #00ff00; background-color: #00ff00;'><img onmousedown='colourDown(10);' src='square.png' width=12 height=12 onmouseover='colourOver(10);'></span><span class='cell' style='color: #ffff00; background-color: #ffff00;'><img onmousedown='colourDown(11);' src='square.png' width=12 height=12 onmouseover='colourOver(11);'></span><span class='cell' style='color: #0000ff; background-color: #0000ff;'><img onmousedown='colourDown(12);' src='square.png' width=12 height=12 onmouseover='colourOver(12);'></span><span class='cell' style='color: #ff00ff; background-color: #ff00ff;'><img onmousedown='colourDown(13);' src='square.png' width=12 height=12 onmouseover='colourOver(13);'></span><span class='cell' style='color: #00ffff; background-color: #00ffff;'><img onmousedown='colourDown(14);' src='square.png' width=12 height=12 onmouseover='colourOver(14);'></span><span class='cell' style='color: #ffffff; background-color: #ffffff;'><img onmousedown='colourDown(15);' src='square.png' width=12 height=12 onmouseover='colourOver(15);'></span><br><br><span class='cell' style='color: #000000; background-color: #000000;'><img onmousedown='colourDown(16);' src='square.png' width=12 height=12 onmouseover='colourOver(16);'></span><span class='cell' style='color: #00005f; background-color: #00005f;'><img onmousedown='colourDown(17);' src='square.png' width=12 height=12 onmouseover='colourOver(17);'></span><span class='cell' style='color: #000087; background-color: #000087;'><img onmousedown='colourDown(18);' src='square.png' width=12 height=12 onmouseover='colourOver(18);'></span><span class='cell' style='color: #0000af; background-color: #0000af;'><img onmousedown='colourDown(19);' src='square.png' width=12 height=12 onmouseover='colourOver(19);'></span><span class='cell' style='color: #0000d7; background-color: #0000d7;'><img onmousedown='colourDown(20);' src='square.png' width=12 height=12 onmouseover='colourOver(20);'></span><span class='cell' style='color: #0000ff; background-color: #0000ff;'><img onmousedown='colourDown(21);' src='square.png' width=12 height=12 onmouseover='colourOver(21);'></span><span class='cell' style='color: #005f00; background-color: #005f00;'><img onmousedown='colourDown(22);' src='square.png' width=12 height=12 onmouseover='colourOver(22);'></span><span class='cell' style='color: #005f5f; background-color: #005f5f;'><img onmousedown='colourDown(23);' src='square.png' width=12 height=12 onmouseover='colourOver(23);'></span><span class='cell' style='color: #005f87; background-color: #005f87;'><img onmousedown='colourDown(24);' src='square.png' width=12 height=12 onmouseover='colourOver(24);'></span><span class='cell' style='color: #005faf; background-color: #005faf;'><img onmousedown='colourDown(25);' src='square.png' width=12 height=12 onmouseover='colourOver(25);'></span><span class='cell' style='color: #005fd7; background-color: #005fd7;'><img onmousedown='colourDown(26);' src='square.png' width=12 height=12 onmouseover='colourOver(26);'></span><span class='cell' style='color: #005fff; background-color: #005fff;'><img onmousedown='colourDown(27);' src='square.png' width=12 height=12 onmouseover='colourOver(27);'></span><span class='cell' style='color: #008700; background-color: #008700;'><img onmousedown='colourDown(28);' src='square.png' width=12 height=12 onmouseover='colourOver(28);'></span><span class='cell' style='color: #00875f; background-color: #00875f;'><img onmousedown='colourDown(29);' src='square.png' width=12 height=12 onmouseover='colourOver(29);'></span><span class='cell' style='color: #008787; background-color: #008787;'><img onmousedown='colourDown(30);' src='square.png' width=12 height=12 onmouseover='colourOver(30);'></span><span class='cell' style='color: #0087af; background-color: #0087af;'><img onmousedown='colourDown(31);' src='square.png' width=12 height=12 onmouseover='colourOver(31);'></span><span class='cell' style='color: #0087d7; background-color: #0087d7;'><img onmousedown='colourDown(32);' src='square.png' width=12 height=12 onmouseover='colourOver(32);'></span><span class='cell' style='color: #0087ff; background-color: #0087ff;'><img onmousedown='colourDown(33);' src='square.png' width=12 height=12 onmouseover='colourOver(33);'></span><span class='cell' style='color: #00af00; background-color: #00af00;'><img onmousedown='colourDown(34);' src='square.png' width=12 height=12 onmouseover='colourOver(34);'></span><span class='cell' style='color: #00af5f; background-color: #00af5f;'><img onmousedown='colourDown(35);' src='square.png' width=12 height=12 onmouseover='colourOver(35);'></span><span class='cell' style='color: #00af87; background-color: #00af87;'><img onmousedown='colourDown(36);' src='square.png' width=12 height=12 onmouseover='colourOver(36);'></span><span class='cell' style='color: #00afaf; background-color: #00afaf;'><img onmousedown='colourDown(37);' src='square.png' width=12 height=12 onmouseover='colourOver(37);'></span><span class='cell' style='color: #00afd7; background-color: #00afd7;'><img onmousedown='colourDown(38);' src='square.png' width=12 height=12 onmouseover='colourOver(38);'></span><span class='cell' style='color: #00afff; background-color: #00afff;'><img onmousedown='colourDown(39);' src='square.png' width=12 height=12 onmouseover='colourOver(39);'></span><span class='cell' style='color: #00d700; background-color: #00d700;'><img onmousedown='colourDown(40);' src='square.png' width=12 height=12 onmouseover='colourOver(40);'></span><span class='cell' style='color: #00d75f; background-color: #00d75f;'><img onmousedown='colourDown(41);' src='square.png' width=12 height=12 onmouseover='colourOver(41);'></span><span class='cell' style='color: #00d787; background-color: #00d787;'><img onmousedown='colourDown(42);' src='square.png' width=12 height=12 onmouseover='colourOver(42);'></span><span class='cell' style='color: #00d7af; background-color: #00d7af;'><img onmousedown='colourDown(43);' src='square.png' width=12 height=12 onmouseover='colourOver(43);'></span><span class='cell' style='color: #00d7d7; background-color: #00d7d7;'><img onmousedown='colourDown(44);' src='square.png' width=12 height=12 onmouseover='colourOver(44);'></span><span class='cell' style='color: #00d7ff; background-color: #00d7ff;'><img onmousedown='colourDown(45);' src='square.png' width=12 height=12 onmouseover='colourOver(45);'></span><span class='cell' style='color: #00ff00; background-color: #00ff00;'><img onmousedown='colourDown(46);' src='square.png' width=12 height=12 onmouseover='colourOver(46);'></span><span class='cell' style='color: #00ff5f; background-color: #00ff5f;'><img onmousedown='colourDown(47);' src='square.png' width=12 height=12 onmouseover='colourOver(47);'></span><span class='cell' style='color: #00ff87; background-color: #00ff87;'><img onmousedown='colourDown(48);' src='square.png' width=12 height=12 onmouseover='colourOver(48);'></span><span class='cell' style='color: #00ffaf; background-color: #00ffaf;'><img onmousedown='colourDown(49);' src='square.png' width=12 height=12 onmouseover='colourOver(49);'></span><span class='cell' style='color: #00ffd7; background-color: #00ffd7;'><img onmousedown='colourDown(50);' src='square.png' width=12 height=12 onmouseover='colourOver(50);'></span><span class='cell' style='color: #00ffff; background-color: #00ffff;'><img onmousedown='colourDown(51);' src='square.png' width=12 height=12 onmouseover='colourOver(51);'></span><br><span class='cell' style='color: #5f0000; background-color: #5f0000;'><img onmousedown='colourDown(52);' src='square.png' width=12 height=12 onmouseover='colourOver(52);'></span><span class='cell' style='color: #5f005f; background-color: #5f005f;'><img onmousedown='colourDown(53);' src='square.png' width=12 height=12 onmouseover='colourOver(53);'></span><span class='cell' style='color: #5f0087; background-color: #5f0087;'><img onmousedown='colourDown(54);' src='square.png' width=12 height=12 onmouseover='colourOver(54);'></span><span class='cell' style='color: #5f00af; background-color: #5f00af;'><img onmousedown='colourDown(55);' src='square.png' width=12 height=12 onmouseover='colourOver(55);'></span><span class='cell' style='color: #5f00d7; background-color: #5f00d7;'><img onmousedown='colourDown(56);' src='square.png' width=12 height=12 onmouseover='colourOver(56);'></span><span class='cell' style='color: #5f00ff; background-color: #5f00ff;'><img onmousedown='colourDown(57);' src='square.png' width=12 height=12 onmouseover='colourOver(57);'></span><span class='cell' style='color: #5f5f00; background-color: #5f5f00;'><img onmousedown='colourDown(58);' src='square.png' width=12 height=12 onmouseover='colourOver(58);'></span><span class='cell' style='color: #5f5f5f; background-color: #5f5f5f;'><img onmousedown='colourDown(59);' src='square.png' width=12 height=12 onmouseover='colourOver(59);'></span><span class='cell' style='color: #5f5f87; background-color: #5f5f87;'><img onmousedown='colourDown(60);' src='square.png' width=12 height=12 onmouseover='colourOver(60);'></span><span class='cell' style='color: #5f5faf; background-color: #5f5faf;'><img onmousedown='colourDown(61);' src='square.png' width=12 height=12 onmouseover='colourOver(61);'></span><span class='cell' style='color: #5f5fd7; background-color: #5f5fd7;'><img onmousedown='colourDown(62);' src='square.png' width=12 height=12 onmouseover='colourOver(62);'></span><span class='cell' style='color: #5f5fff; background-color: #5f5fff;'><img onmousedown='colourDown(63);' src='square.png' width=12 height=12 onmouseover='colourOver(63);'></span><span class='cell' style='color: #5f8700; background-color: #5f8700;'><img onmousedown='colourDown(64);' src='square.png' width=12 height=12 onmouseover='colourOver(64);'></span><span class='cell' style='color: #5f875f; background-color: #5f875f;'><img onmousedown='colourDown(65);' src='square.png' width=12 height=12 onmouseover='colourOver(65);'></span><span class='cell' style='color: #5f8787; background-color: #5f8787;'><img onmousedown='colourDown(66);' src='square.png' width=12 height=12 onmouseover='colourOver(66);'></span><span class='cell' style='color: #5f87af; background-color: #5f87af;'><img onmousedown='colourDown(67);' src='square.png' width=12 height=12 onmouseover='colourOver(67);'></span><span class='cell' style='color: #5f87d7; background-color: #5f87d7;'><img onmousedown='colourDown(68);' src='square.png' width=12 height=12 onmouseover='colourOver(68);'></span><span class='cell' style='color: #5f87ff; background-color: #5f87ff;'><img onmousedown='colourDown(69);' src='square.png' width=12 height=12 onmouseover='colourOver(69);'></span><span class='cell' style='color: #5faf00; background-color: #5faf00;'><img onmousedown='colourDown(70);' src='square.png' width=12 height=12 onmouseover='colourOver(70);'></span><span class='cell' style='color: #5faf5f; background-color: #5faf5f;'><img onmousedown='colourDown(71);' src='square.png' width=12 height=12 onmouseover='colourOver(71);'></span><span class='cell' style='color: #5faf87; background-color: #5faf87;'><img onmousedown='colourDown(72);' src='square.png' width=12 height=12 onmouseover='colourOver(72);'></span><span class='cell' style='color: #5fafaf; background-color: #5fafaf;'><img onmousedown='colourDown(73);' src='square.png' width=12 height=12 onmouseover='colourOver(73);'></span><span class='cell' style='color: #5fafd7; background-color: #5fafd7;'><img onmousedown='colourDown(74);' src='square.png' width=12 height=12 onmouseover='colourOver(74);'></span><span class='cell' style='color: #5fafff; background-color: #5fafff;'><img onmousedown='colourDown(75);' src='square.png' width=12 height=12 onmouseover='colourOver(75);'></span><span class='cell' style='color: #5fd700; background-color: #5fd700;'><img onmousedown='colourDown(76);' src='square.png' width=12 height=12 onmouseover='colourOver(76);'></span><span class='cell' style='color: #5fd75f; background-color: #5fd75f;'><img onmousedown='colourDown(77);' src='square.png' width=12 height=12 onmouseover='colourOver(77);'></span><span class='cell' style='color: #5fd787; background-color: #5fd787;'><img onmousedown='colourDown(78);' src='square.png' width=12 height=12 onmouseover='colourOver(78);'></span><span class='cell' style='color: #5fd7af; background-color: #5fd7af;'><img onmousedown='colourDown(79);' src='square.png' width=12 height=12 onmouseover='colourOver(79);'></span><span class='cell' style='color: #5fd7d7; background-color: #5fd7d7;'><img onmousedown='colourDown(80);' src='square.png' width=12 height=12 onmouseover='colourOver(80);'></span><span class='cell' style='color: #5fd7ff; background-color: #5fd7ff;'><img onmousedown='colourDown(81);' src='square.png' width=12 height=12 onmouseover='colourOver(81);'></span><span class='cell' style='color: #5fff00; background-color: #5fff00;'><img onmousedown='colourDown(82);' src='square.png' width=12 height=12 onmouseover='colourOver(82);'></span><span class='cell' style='color: #5fff5f; background-color: #5fff5f;'><img onmousedown='colourDown(83);' src='square.png' width=12 height=12 onmouseover='colourOver(83);'></span><span class='cell' style='color: #5fff87; background-color: #5fff87;'><img onmousedown='colourDown(84);' src='square.png' width=12 height=12 onmouseover='colourOver(84);'></span><span class='cell' style='color: #5fffaf; background-color: #5fffaf;'><img onmousedown='colourDown(85);' src='square.png' width=12 height=12 onmouseover='colourOver(85);'></span><span class='cell' style='color: #5fffd7; background-color: #5fffd7;'><img onmousedown='colourDown(86);' src='square.png' width=12 height=12 onmouseover='colourOver(86);'></span><span class='cell' style='color: #5fffff; background-color: #5fffff;'><img onmousedown='colourDown(87);' src='square.png' width=12 height=12 onmouseover='colourOver(87);'></span><br><span class='cell' style='color: #870000; background-color: #870000;'><img onmousedown='colourDown(88);' src='square.png' width=12 height=12 onmouseover='colourOver(88);'></span><span class='cell' style='color: #87005f; background-color: #87005f;'><img onmousedown='colourDown(89);' src='square.png' width=12 height=12 onmouseover='colourOver(89);'></span><span class='cell' style='color: #870087; background-color: #870087;'><img onmousedown='colourDown(90);' src='square.png' width=12 height=12 onmouseover='colourOver(90);'></span><span class='cell' style='color: #8700af; background-color: #8700af;'><img onmousedown='colourDown(91);' src='square.png' width=12 height=12 onmouseover='colourOver(91);'></span><span class='cell' style='color: #8700d7; background-color: #8700d7;'><img onmousedown='colourDown(92);' src='square.png' width=12 height=12 onmouseover='colourOver(92);'></span><span class='cell' style='color: #8700ff; background-color: #8700ff;'><img onmousedown='colourDown(93);' src='square.png' width=12 height=12 onmouseover='colourOver(93);'></span><span class='cell' style='color: #875f00; background-color: #875f00;'><img onmousedown='colourDown(94);' src='square.png' width=12 height=12 onmouseover='colourOver(94);'></span><span class='cell' style='color: #875f5f; background-color: #875f5f;'><img onmousedown='colourDown(95);' src='square.png' width=12 height=12 onmouseover='colourOver(95);'></span><span class='cell' style='color: #875f87; background-color: #875f87;'><img onmousedown='colourDown(96);' src='square.png' width=12 height=12 onmouseover='colourOver(96);'></span><span class='cell' style='color: #875faf; background-color: #875faf;'><img onmousedown='colourDown(97);' src='square.png' width=12 height=12 onmouseover='colourOver(97);'></span><span class='cell' style='color: #875fd7; background-color: #875fd7;'><img onmousedown='colourDown(98);' src='square.png' width=12 height=12 onmouseover='colourOver(98);'></span><span class='cell' style='color: #875fff; background-color: #875fff;'><img onmousedown='colourDown(99);' src='square.png' width=12 height=12 onmouseover='colourOver(99);'></span><span class='cell' style='color: #878700; background-color: #878700;'><img onmousedown='colourDown(100);' src='square.png' width=12 height=12 onmouseover='colourOver(100);'></span><span class='cell' style='color: #87875f; background-color: #87875f;'><img onmousedown='colourDown(101);' src='square.png' width=12 height=12 onmouseover='colourOver(101);'></span><span class='cell' style='color: #878787; background-color: #878787;'><img onmousedown='colourDown(102);' src='square.png' width=12 height=12 onmouseover='colourOver(102);'></span><span class='cell' style='color: #8787af; background-color: #8787af;'><img onmousedown='colourDown(103);' src='square.png' width=12 height=12 onmouseover='colourOver(103);'></span><span class='cell' style='color: #8787d7; background-color: #8787d7;'><img onmousedown='colourDown(104);' src='square.png' width=12 height=12 onmouseover='colourOver(104);'></span><span class='cell' style='color: #8787ff; background-color: #8787ff;'><img onmousedown='colourDown(105);' src='square.png' width=12 height=12 onmouseover='colourOver(105);'></span><span class='cell' style='color: #87af00; background-color: #87af00;'><img onmousedown='colourDown(106);' src='square.png' width=12 height=12 onmouseover='colourOver(106);'></span><span class='cell' style='color: #87af5f; background-color: #87af5f;'><img onmousedown='colourDown(107);' src='square.png' width=12 height=12 onmouseover='colourOver(107);'></span><span class='cell' style='color: #87af87; background-color: #87af87;'><img onmousedown='colourDown(108);' src='square.png' width=12 height=12 onmouseover='colourOver(108);'></span><span class='cell' style='color: #87afaf; background-color: #87afaf;'><img onmousedown='colourDown(109);' src='square.png' width=12 height=12 onmouseover='colourOver(109);'></span><span class='cell' style='color: #87afd7; background-color: #87afd7;'><img onmousedown='colourDown(110);' src='square.png' width=12 height=12 onmouseover='colourOver(110);'></span><span class='cell' style='color: #87afff; background-color: #87afff;'><img onmousedown='colourDown(111);' src='square.png' width=12 height=12 onmouseover='colourOver(111);'></span><span class='cell' style='color: #87d700; background-color: #87d700;'><img onmousedown='colourDown(112);' src='square.png' width=12 height=12 onmouseover='colourOver(112);'></span><span class='cell' style='color: #87d75f; background-color: #87d75f;'><img onmousedown='colourDown(113);' src='square.png' width=12 height=12 onmouseover='colourOver(113);'></span><span class='cell' style='color: #87d787; background-color: #87d787;'><img onmousedown='colourDown(114);' src='square.png' width=12 height=12 onmouseover='colourOver(114);'></span><span class='cell' style='color: #87d7af; background-color: #87d7af;'><img onmousedown='colourDown(115);' src='square.png' width=12 height=12 onmouseover='colourOver(115);'></span><span class='cell' style='color: #87d7d7; background-color: #87d7d7;'><img onmousedown='colourDown(116);' src='square.png' width=12 height=12 onmouseover='colourOver(116);'></span><span class='cell' style='color: #87d7ff; background-color: #87d7ff;'><img onmousedown='colourDown(117);' src='square.png' width=12 height=12 onmouseover='colourOver(117);'></span><span class='cell' style='color: #87ff00; background-color: #87ff00;'><img onmousedown='colourDown(118);' src='square.png' width=12 height=12 onmouseover='colourOver(118);'></span><span class='cell' style='color: #87ff5f; background-color: #87ff5f;'><img onmousedown='colourDown(119);' src='square.png' width=12 height=12 onmouseover='colourOver(119);'></span><span class='cell' style='color: #87ff87; background-color: #87ff87;'><img onmousedown='colourDown(120);' src='square.png' width=12 height=12 onmouseover='colourOver(120);'></span><span class='cell' style='color: #87ffaf; background-color: #87ffaf;'><img onmousedown='colourDown(121);' src='square.png' width=12 height=12 onmouseover='colourOver(121);'></span><span class='cell' style='color: #87ffd7; background-color: #87ffd7;'><img onmousedown='colourDown(122);' src='square.png' width=12 height=12 onmouseover='colourOver(122);'></span><span class='cell' style='color: #87ffff; background-color: #87ffff;'><img onmousedown='colourDown(123);' src='square.png' width=12 height=12 onmouseover='colourOver(123);'></span><br><span class='cell' style='color: #af0000; background-color: #af0000;'><img onmousedown='colourDown(124);' src='square.png' width=12 height=12 onmouseover='colourOver(124);'></span><span class='cell' style='color: #af005f; background-color: #af005f;'><img onmousedown='colourDown(125);' src='square.png' width=12 height=12 onmouseover='colourOver(125);'></span><span class='cell' style='color: #af0087; background-color: #af0087;'><img onmousedown='colourDown(126);' src='square.png' width=12 height=12 onmouseover='colourOver(126);'></span><span class='cell' style='color: #af00af; background-color: #af00af;'><img onmousedown='colourDown(127);' src='square.png' width=12 height=12 onmouseover='colourOver(127);'></span><span class='cell' style='color: #af00d7; background-color: #af00d7;'><img onmousedown='colourDown(128);' src='square.png' width=12 height=12 onmouseover='colourOver(128);'></span><span class='cell' style='color: #af00ff; background-color: #af00ff;'><img onmousedown='colourDown(129);' src='square.png' width=12 height=12 onmouseover='colourOver(129);'></span><span class='cell' style='color: #af5f00; background-color: #af5f00;'><img onmousedown='colourDown(130);' src='square.png' width=12 height=12 onmouseover='colourOver(130);'></span><span class='cell' style='color: #af5f5f; background-color: #af5f5f;'><img onmousedown='colourDown(131);' src='square.png' width=12 height=12 onmouseover='colourOver(131);'></span><span class='cell' style='color: #af5f87; background-color: #af5f87;'><img onmousedown='colourDown(132);' src='square.png' width=12 height=12 onmouseover='colourOver(132);'></span><span class='cell' style='color: #af5faf; background-color: #af5faf;'><img onmousedown='colourDown(133);' src='square.png' width=12 height=12 onmouseover='colourOver(133);'></span><span class='cell' style='color: #af5fd7; background-color: #af5fd7;'><img onmousedown='colourDown(134);' src='square.png' width=12 height=12 onmouseover='colourOver(134);'></span><span class='cell' style='color: #af5fff; background-color: #af5fff;'><img onmousedown='colourDown(135);' src='square.png' width=12 height=12 onmouseover='colourOver(135);'></span><span class='cell' style='color: #af8700; background-color: #af8700;'><img onmousedown='colourDown(136);' src='square.png' width=12 height=12 onmouseover='colourOver(136);'></span><span class='cell' style='color: #af875f; background-color: #af875f;'><img onmousedown='colourDown(137);' src='square.png' width=12 height=12 onmouseover='colourOver(137);'></span><span class='cell' style='color: #af8787; background-color: #af8787;'><img onmousedown='colourDown(138);' src='square.png' width=12 height=12 onmouseover='colourOver(138);'></span><span class='cell' style='color: #af87af; background-color: #af87af;'><img onmousedown='colourDown(139);' src='square.png' width=12 height=12 onmouseover='colourOver(139);'></span><span class='cell' style='color: #af87d7; background-color: #af87d7;'><img onmousedown='colourDown(140);' src='square.png' width=12 height=12 onmouseover='colourOver(140);'></span><span class='cell' style='color: #af87ff; background-color: #af87ff;'><img onmousedown='colourDown(141);' src='square.png' width=12 height=12 onmouseover='colourOver(141);'></span><span class='cell' style='color: #afaf00; background-color: #afaf00;'><img onmousedown='colourDown(142);' src='square.png' width=12 height=12 onmouseover='colourOver(142);'></span><span class='cell' style='color: #afaf5f; background-color: #afaf5f;'><img onmousedown='colourDown(143);' src='square.png' width=12 height=12 onmouseover='colourOver(143);'></span><span class='cell' style='color: #afaf87; background-color: #afaf87;'><img onmousedown='colourDown(144);' src='square.png' width=12 height=12 onmouseover='colourOver(144);'></span><span class='cell' style='color: #afafaf; background-color: #afafaf;'><img onmousedown='colourDown(145);' src='square.png' width=12 height=12 onmouseover='colourOver(145);'></span><span class='cell' style='color: #afafd7; background-color: #afafd7;'><img onmousedown='colourDown(146);' src='square.png' width=12 height=12 onmouseover='colourOver(146);'></span><span class='cell' style='color: #afafff; background-color: #afafff;'><img onmousedown='colourDown(147);' src='square.png' width=12 height=12 onmouseover='colourOver(147);'></span><span class='cell' style='color: #afd700; background-color: #afd700;'><img onmousedown='colourDown(148);' src='square.png' width=12 height=12 onmouseover='colourOver(148);'></span><span class='cell' style='color: #afd75f; background-color: #afd75f;'><img onmousedown='colourDown(149);' src='square.png' width=12 height=12 onmouseover='colourOver(149);'></span><span class='cell' style='color: #afd787; background-color: #afd787;'><img onmousedown='colourDown(150);' src='square.png' width=12 height=12 onmouseover='colourOver(150);'></span><span class='cell' style='color: #afd7af; background-color: #afd7af;'><img onmousedown='colourDown(151);' src='square.png' width=12 height=12 onmouseover='colourOver(151);'></span><span class='cell' style='color: #afd7d7; background-color: #afd7d7;'><img onmousedown='colourDown(152);' src='square.png' width=12 height=12 onmouseover='colourOver(152);'></span><span class='cell' style='color: #afd7ff; background-color: #afd7ff;'><img onmousedown='colourDown(153);' src='square.png' width=12 height=12 onmouseover='colourOver(153);'></span><span class='cell' style='color: #afff00; background-color: #afff00;'><img onmousedown='colourDown(154);' src='square.png' width=12 height=12 onmouseover='colourOver(154);'></span><span class='cell' style='color: #afff5f; background-color: #afff5f;'><img onmousedown='colourDown(155);' src='square.png' width=12 height=12 onmouseover='colourOver(155);'></span><span class='cell' style='color: #afff87; background-color: #afff87;'><img onmousedown='colourDown(156);' src='square.png' width=12 height=12 onmouseover='colourOver(156);'></span><span class='cell' style='color: #afffaf; background-color: #afffaf;'><img onmousedown='colourDown(157);' src='square.png' width=12 height=12 onmouseover='colourOver(157);'></span><span class='cell' style='color: #afffd7; background-color: #afffd7;'><img onmousedown='colourDown(158);' src='square.png' width=12 height=12 onmouseover='colourOver(158);'></span><span class='cell' style='color: #afffff; background-color: #afffff;'><img onmousedown='colourDown(159);' src='square.png' width=12 height=12 onmouseover='colourOver(159);'></span><br><span class='cell' style='color: #d70000; background-color: #d70000;'><img onmousedown='colourDown(160);' src='square.png' width=12 height=12 onmouseover='colourOver(160);'></span><span class='cell' style='color: #d7005f; background-color: #d7005f;'><img onmousedown='colourDown(161);' src='square.png' width=12 height=12 onmouseover='colourOver(161);'></span><span class='cell' style='color: #d70087; background-color: #d70087;'><img onmousedown='colourDown(162);' src='square.png' width=12 height=12 onmouseover='colourOver(162);'></span><span class='cell' style='color: #d700af; background-color: #d700af;'><img onmousedown='colourDown(163);' src='square.png' width=12 height=12 onmouseover='colourOver(163);'></span><span class='cell' style='color: #d700d7; background-color: #d700d7;'><img onmousedown='colourDown(164);' src='square.png' width=12 height=12 onmouseover='colourOver(164);'></span><span class='cell' style='color: #d700ff; background-color: #d700ff;'><img onmousedown='colourDown(165);' src='square.png' width=12 height=12 onmouseover='colourOver(165);'></span><span class='cell' style='color: #d75f00; background-color: #d75f00;'><img onmousedown='colourDown(166);' src='square.png' width=12 height=12 onmouseover='colourOver(166);'></span><span class='cell' style='color: #d75f5f; background-color: #d75f5f;'><img onmousedown='colourDown(167);' src='square.png' width=12 height=12 onmouseover='colourOver(167);'></span><span class='cell' style='color: #d75f87; background-color: #d75f87;'><img onmousedown='colourDown(168);' src='square.png' width=12 height=12 onmouseover='colourOver(168);'></span><span class='cell' style='color: #d75faf; background-color: #d75faf;'><img onmousedown='colourDown(169);' src='square.png' width=12 height=12 onmouseover='colourOver(169);'></span><span class='cell' style='color: #d75fd7; background-color: #d75fd7;'><img onmousedown='colourDown(170);' src='square.png' width=12 height=12 onmouseover='colourOver(170);'></span><span class='cell' style='color: #d75fff; background-color: #d75fff;'><img onmousedown='colourDown(171);' src='square.png' width=12 height=12 onmouseover='colourOver(171);'></span><span class='cell' style='color: #d78700; background-color: #d78700;'><img onmousedown='colourDown(172);' src='square.png' width=12 height=12 onmouseover='colourOver(172);'></span><span class='cell' style='color: #d7875f; background-color: #d7875f;'><img onmousedown='colourDown(173);' src='square.png' width=12 height=12 onmouseover='colourOver(173);'></span><span class='cell' style='color: #d78787; background-color: #d78787;'><img onmousedown='colourDown(174);' src='square.png' width=12 height=12 onmouseover='colourOver(174);'></span><span class='cell' style='color: #d787af; background-color: #d787af;'><img onmousedown='colourDown(175);' src='square.png' width=12 height=12 onmouseover='colourOver(175);'></span><span class='cell' style='color: #d787d7; background-color: #d787d7;'><img onmousedown='colourDown(176);' src='square.png' width=12 height=12 onmouseover='colourOver(176);'></span><span class='cell' style='color: #d787ff; background-color: #d787ff;'><img onmousedown='colourDown(177);' src='square.png' width=12 height=12 onmouseover='colourOver(177);'></span><span class='cell' style='color: #d7af00; background-color: #d7af00;'><img onmousedown='colourDown(178);' src='square.png' width=12 height=12 onmouseover='colourOver(178);'></span><span class='cell' style='color: #d7af5f; background-color: #d7af5f;'><img onmousedown='colourDown(179);' src='square.png' width=12 height=12 onmouseover='colourOver(179);'></span><span class='cell' style='color: #d7af87; background-color: #d7af87;'><img onmousedown='colourDown(180);' src='square.png' width=12 height=12 onmouseover='colourOver(180);'></span><span class='cell' style='color: #d7afaf; background-color: #d7afaf;'><img onmousedown='colourDown(181);' src='square.png' width=12 height=12 onmouseover='colourOver(181);'></span><span class='cell' style='color: #d7afd7; background-color: #d7afd7;'><img onmousedown='colourDown(182);' src='square.png' width=12 height=12 onmouseover='colourOver(182);'></span><span class='cell' style='color: #d7afff; background-color: #d7afff;'><img onmousedown='colourDown(183);' src='square.png' width=12 height=12 onmouseover='colourOver(183);'></span><span class='cell' style='color: #d7d700; background-color: #d7d700;'><img onmousedown='colourDown(184);' src='square.png' width=12 height=12 onmouseover='colourOver(184);'></span><span class='cell' style='color: #d7d75f; background-color: #d7d75f;'><img onmousedown='colourDown(185);' src='square.png' width=12 height=12 onmouseover='colourOver(185);'></span><span class='cell' style='color: #d7d787; background-color: #d7d787;'><img onmousedown='colourDown(186);' src='square.png' width=12 height=12 onmouseover='colourOver(186);'></span><span class='cell' style='color: #d7d7af; background-color: #d7d7af;'><img onmousedown='colourDown(187);' src='square.png' width=12 height=12 onmouseover='colourOver(187);'></span><span class='cell' style='color: #d7d7d7; background-color: #d7d7d7;'><img onmousedown='colourDown(188);' src='square.png' width=12 height=12 onmouseover='colourOver(188);'></span><span class='cell' style='color: #d7d7ff; background-color: #d7d7ff;'><img onmousedown='colourDown(189);' src='square.png' width=12 height=12 onmouseover='colourOver(189);'></span><span class='cell' style='color: #d7ff00; background-color: #d7ff00;'><img onmousedown='colourDown(190);' src='square.png' width=12 height=12 onmouseover='colourOver(190);'></span><span class='cell' style='color: #d7ff5f; background-color: #d7ff5f;'><img onmousedown='colourDown(191);' src='square.png' width=12 height=12 onmouseover='colourOver(191);'></span><span class='cell' style='color: #d7ff87; background-color: #d7ff87;'><img onmousedown='colourDown(192);' src='square.png' width=12 height=12 onmouseover='colourOver(192);'></span><span class='cell' style='color: #d7ffaf; background-color: #d7ffaf;'><img onmousedown='colourDown(193);' src='square.png' width=12 height=12 onmouseover='colourOver(193);'></span><span class='cell' style='color: #d7ffd7; background-color: #d7ffd7;'><img onmousedown='colourDown(194);' src='square.png' width=12 height=12 onmouseover='colourOver(194);'></span><span class='cell' style='color: #d7ffff; background-color: #d7ffff;'><img onmousedown='colourDown(195);' src='square.png' width=12 height=12 onmouseover='colourOver(195);'></span><br><span class='cell' style='color: #ff0000; background-color: #ff0000;'><img onmousedown='colourDown(196);' src='square.png' width=12 height=12 onmouseover='colourOver(196);'></span><span class='cell' style='color: #ff005f; background-color: #ff005f;'><img onmousedown='colourDown(197);' src='square.png' width=12 height=12 onmouseover='colourOver(197);'></span><span class='cell' style='color: #ff0087; background-color: #ff0087;'><img onmousedown='colourDown(198);' src='square.png' width=12 height=12 onmouseover='colourOver(198);'></span><span class='cell' style='color: #ff00af; background-color: #ff00af;'><img onmousedown='colourDown(199);' src='square.png' width=12 height=12 onmouseover='colourOver(199);'></span><span class='cell' style='color: #ff00d7; background-color: #ff00d7;'><img onmousedown='colourDown(200);' src='square.png' width=12 height=12 onmouseover='colourOver(200);'></span><span class='cell' style='color: #ff00ff; background-color: #ff00ff;'><img onmousedown='colourDown(201);' src='square.png' width=12 height=12 onmouseover='colourOver(201);'></span><span class='cell' style='color: #ff5f00; background-color: #ff5f00;'><img onmousedown='colourDown(202);' src='square.png' width=12 height=12 onmouseover='colourOver(202);'></span><span class='cell' style='color: #ff5f5f; background-color: #ff5f5f;'><img onmousedown='colourDown(203);' src='square.png' width=12 height=12 onmouseover='colourOver(203);'></span><span class='cell' style='color: #ff5f87; background-color: #ff5f87;'><img onmousedown='colourDown(204);' src='square.png' width=12 height=12 onmouseover='colourOver(204);'></span><span class='cell' style='color: #ff5faf; background-color: #ff5faf;'><img onmousedown='colourDown(205);' src='square.png' width=12 height=12 onmouseover='colourOver(205);'></span><span class='cell' style='color: #ff5fd7; background-color: #ff5fd7;'><img onmousedown='colourDown(206);' src='square.png' width=12 height=12 onmouseover='colourOver(206);'></span><span class='cell' style='color: #ff5fff; background-color: #ff5fff;'><img onmousedown='colourDown(207);' src='square.png' width=12 height=12 onmouseover='colourOver(207);'></span><span class='cell' style='color: #ff8700; background-color: #ff8700;'><img onmousedown='colourDown(208);' src='square.png' width=12 height=12 onmouseover='colourOver(208);'></span><span class='cell' style='color: #ff875f; background-color: #ff875f;'><img onmousedown='colourDown(209);' src='square.png' width=12 height=12 onmouseover='colourOver(209);'></span><span class='cell' style='color: #ff8787; background-color: #ff8787;'><img onmousedown='colourDown(210);' src='square.png' width=12 height=12 onmouseover='colourOver(210);'></span><span class='cell' style='color: #ff87af; background-color: #ff87af;'><img onmousedown='colourDown(211);' src='square.png' width=12 height=12 onmouseover='colourOver(211);'></span><span class='cell' style='color: #ff87d7; background-color: #ff87d7;'><img onmousedown='colourDown(212);' src='square.png' width=12 height=12 onmouseover='colourOver(212);'></span><span class='cell' style='color: #ff87ff; background-color: #ff87ff;'><img onmousedown='colourDown(213);' src='square.png' width=12 height=12 onmouseover='colourOver(213);'></span><span class='cell' style='color: #ffaf00; background-color: #ffaf00;'><img onmousedown='colourDown(214);' src='square.png' width=12 height=12 onmouseover='colourOver(214);'></span><span class='cell' style='color: #ffaf5f; background-color: #ffaf5f;'><img onmousedown='colourDown(215);' src='square.png' width=12 height=12 onmouseover='colourOver(215);'></span><span class='cell' style='color: #ffaf87; background-color: #ffaf87;'><img onmousedown='colourDown(216);' src='square.png' width=12 height=12 onmouseover='colourOver(216);'></span><span class='cell' style='color: #ffafaf; background-color: #ffafaf;'><img onmousedown='colourDown(217);' src='square.png' width=12 height=12 onmouseover='colourOver(217);'></span><span class='cell' style='color: #ffafd7; background-color: #ffafd7;'><img onmousedown='colourDown(218);' src='square.png' width=12 height=12 onmouseover='colourOver(218);'></span><span class='cell' style='color: #ffafff; background-color: #ffafff;'><img onmousedown='colourDown(219);' src='square.png' width=12 height=12 onmouseover='colourOver(219);'></span><span class='cell' style='color: #ffd700; background-color: #ffd700;'><img onmousedown='colourDown(220);' src='square.png' width=12 height=12 onmouseover='colourOver(220);'></span><span class='cell' style='color: #ffd75f; background-color: #ffd75f;'><img onmousedown='colourDown(221);' src='square.png' width=12 height=12 onmouseover='colourOver(221);'></span><span class='cell' style='color: #ffd787; background-color: #ffd787;'><img onmousedown='colourDown(222);' src='square.png' width=12 height=12 onmouseover='colourOver(222);'></span><span class='cell' style='color: #ffd7af; background-color: #ffd7af;'><img onmousedown='colourDown(223);' src='square.png' width=12 height=12 onmouseover='colourOver(223);'></span><span class='cell' style='color: #ffd7d7; background-color: #ffd7d7;'><img onmousedown='colourDown(224);' src='square.png' width=12 height=12 onmouseover='colourOver(224);'></span><span class='cell' style='color: #ffd7ff; background-color: #ffd7ff;'><img onmousedown='colourDown(225);' src='square.png' width=12 height=12 onmouseover='colourOver(225);'></span><span class='cell' style='color: #ffff00; background-color: #ffff00;'><img onmousedown='colourDown(226);' src='square.png' width=12 height=12 onmouseover='colourOver(226);'></span><span class='cell' style='color: #ffff5f; background-color: #ffff5f;'><img onmousedown='colourDown(227);' src='square.png' width=12 height=12 onmouseover='colourOver(227);'></span><span class='cell' style='color: #ffff87; background-color: #ffff87;'><img onmousedown='colourDown(228);' src='square.png' width=12 height=12 onmouseover='colourOver(228);'></span><span class='cell' style='color: #ffffaf; background-color: #ffffaf;'><img onmousedown='colourDown(229);' src='square.png' width=12 height=12 onmouseover='colourOver(229);'></span><span class='cell' style='color: #ffffd7; background-color: #ffffd7;'><img onmousedown='colourDown(230);' src='square.png' width=12 height=12 onmouseover='colourOver(230);'></span><span class='cell' style='color: #ffffff; background-color: #ffffff;'><img onmousedown='colourDown(231);' src='square.png' width=12 height=12 onmouseover='colourOver(231);'></span><br><br><span class='cell' style='color: #080808; background-color: #080808;'><img onmousedown='colourDown(232);' src='square.png' width=12 height=12 onmouseover='colourOver(232);'></span><span class='cell' style='color: #121212; background-color: #121212;'><img onmousedown='colourDown(233);' src='square.png' width=12 height=12 onmouseover='colourOver(233);'></span><span class='cell' style='color: #1c1c1c; background-color: #1c1c1c;'><img onmousedown='colourDown(234);' src='square.png' width=12 height=12 onmouseover='colourOver(234);'></span><span class='cell' style='color: #262626; background-color: #262626;'><img onmousedown='colourDown(235);' src='square.png' width=12 height=12 onmouseover='colourOver(235);'></span><span class='cell' style='color: #303030; background-color: #303030;'><img onmousedown='colourDown(236);' src='square.png' width=12 height=12 onmouseover='colourOver(236);'></span><span class='cell' style='color: #3a3a3a; background-color: #3a3a3a;'><img onmousedown='colourDown(237);' src='square.png' width=12 height=12 onmouseover='colourOver(237);'></span><span class='cell' style='color: #444444; background-color: #444444;'><img onmousedown='colourDown(238);' src='square.png' width=12 height=12 onmouseover='colourOver(238);'></span><span class='cell' style='color: #4e4e4e; background-color: #4e4e4e;'><img onmousedown='colourDown(239);' src='square.png' width=12 height=12 onmouseover='colourOver(239);'></span><span class='cell' style='color: #585858; background-color: #585858;'><img onmousedown='colourDown(240);' src='square.png' width=12 height=12 onmouseover='colourOver(240);'></span><span class='cell' style='color: #606060; background-color: #606060;'><img onmousedown='colourDown(241);' src='square.png' width=12 height=12 onmouseover='colourOver(241);'></span><span class='cell' style='color: #666666; background-color: #666666;'><img onmousedown='colourDown(242);' src='square.png' width=12 height=12 onmouseover='colourOver(242);'></span><span class='cell' style='color: #767676; background-color: #767676;'><img onmousedown='colourDown(243);' src='square.png' width=12 height=12 onmouseover='colourOver(243);'></span><span class='cell' style='color: #808080; background-color: #808080;'><img onmousedown='colourDown(244);' src='square.png' width=12 height=12 onmouseover='colourOver(244);'></span><span class='cell' style='color: #8a8a8a; background-color: #8a8a8a;'><img onmousedown='colourDown(245);' src='square.png' width=12 height=12 onmouseover='colourOver(245);'></span><span class='cell' style='color: #949494; background-color: #949494;'><img onmousedown='colourDown(246);' src='square.png' width=12 height=12 onmouseover='colourOver(246);'></span><span class='cell' style='color: #9e9e9e; background-color: #9e9e9e;'><img onmousedown='colourDown(247);' src='square.png' width=12 height=12 onmouseover='colourOver(247);'></span><span class='cell' style='color: #a8a8a8; background-color: #a8a8a8;'><img onmousedown='colourDown(248);' src='square.png' width=12 height=12 onmouseover='colourOver(248);'></span><span class='cell' style='color: #b2b2b2; background-color: #b2b2b2;'><img onmousedown='colourDown(249);' src='square.png' width=12 height=12 onmouseover='colourOver(249);'></span><span class='cell' style='color: #bcbcbc; background-color: #bcbcbc;'><img onmousedown='colourDown(250);' src='square.png' width=12 height=12 onmouseover='colourOver(250);'></span><span class='cell' style='color: #c6c6c6; background-color: #c6c6c6;'><img onmousedown='colourDown(251);' src='square.png' width=12 height=12 onmouseover='colourOver(251);'></span><span class='cell' style='color: #d0d0d0; background-color: #d0d0d0;'><img onmousedown='colourDown(252);' src='square.png' width=12 height=12 onmouseover='colourOver(252);'></span><span class='cell' style='color: #dadada; background-color: #dadada;'><img onmousedown='colourDown(253);' src='square.png' width=12 height=12 onmouseover='colourOver(253);'></span><span class='cell' style='color: #e4e4e4; background-color: #e4e4e4;'><img onmousedown='colourDown(254);' src='square.png' width=12 height=12 onmouseover='colourOver(254);'></span><span class='cell' style='color: #eeeeee; background-color: #eeeeee;'><img onmousedown='colourDown(255);' src='square.png' width=12 height=12 onmouseover='colourOver(255);'></span></span>");
+pangrams[0] = "<span class='l21 letter' onmouseover='elementOver(21);' onmousedown='elementDown(21);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>V</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='l23 letter' onmouseover='elementOver(23);' onmousedown='elementDown(23);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>x</span><span class='inert'>&nbsp;</span><span class='l16 letter' onmouseover='elementOver(16);' onmousedown='elementDown(16);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>q</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='l18 letter' onmouseover='elementOver(18);' onmousedown='elementDown(18);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>s</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='inert'>&nbsp;</span><span class='l22 letter' onmouseover='elementOver(22);' onmousedown='elementDown(22);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>w</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l25 letter' onmouseover='elementOver(25);' onmousedown='elementDown(25);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>z</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l17 letter' onmouseover='elementOver(17);' onmousedown='elementDown(17);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>r</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='inert'>,</span><span class='inert'>&nbsp;</span><span class='l9 letter' onmouseover='elementOver(9);' onmousedown='elementDown(9);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>j</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='l6 letter' onmouseover='elementOver(6);' onmousedown='elementDown(6);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>g</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='inert'>&nbsp;</span><span class='l12 letter' onmouseover='elementOver(12);' onmousedown='elementDown(12);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>m</span><span class='l24 letter' onmouseover='elementOver(24);' onmousedown='elementDown(24);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>y</span><span class='inert'>&nbsp;</span><span class='l1 letter' onmouseover='elementOver(1);' onmousedown='elementDown(1);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>b</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l2 letter' onmouseover='elementOver(2);' onmousedown='elementDown(2);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>c</span><span class='l10 letter' onmouseover='elementOver(10);' onmousedown='elementDown(10);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>k</span><span class='l5 letter' onmouseover='elementOver(5);' onmousedown='elementDown(5);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>f</span><span class='l11 letter' onmouseover='elementOver(11);' onmousedown='elementDown(11);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>l</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l15 letter' onmouseover='elementOver(15);' onmousedown='elementDown(15);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>p</span><span class='inert'>&nbsp;</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l13 letter' onmouseover='elementOver(13);' onmousedown='elementDown(13);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>n</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='inert'>.</span><span class='inert'>&nbsp;</span><span class='l26 letter' onmouseover='elementOver(26);' onmousedown='elementDown(26);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>0</span><span class='l27 letter' onmouseover='elementOver(27);' onmousedown='elementDown(27);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>1</span><span class='l28 letter' onmouseover='elementOver(28);' onmousedown='elementDown(28);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>2</span><span class='l29 letter' onmouseover='elementOver(29);' onmousedown='elementDown(29);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>3</span><span class='l30 letter' onmouseover='elementOver(30);' onmousedown='elementDown(30);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>4</span><span class='l31 letter' onmouseover='elementOver(31);' onmousedown='elementDown(31);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>5</span><span class='l32 letter' onmouseover='elementOver(32);' onmousedown='elementDown(32);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>6</span><span class='l33 letter' onmouseover='elementOver(33);' onmousedown='elementDown(33);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>7</span><span class='l34 letter' onmouseover='elementOver(34);' onmousedown='elementDown(34);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>8</span><span class='l35 letter' onmouseover='elementOver(35);' onmousedown='elementDown(35);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>9</span><span class='inert'>.</span>";
+clean[0] = "Vex quest wizard, judge my backflop hand. 0123456789.";
+pangrams[1] = "<span class='l18 letter' onmouseover='elementOver(18);' onmousedown='elementDown(18);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>S</span><span class='l15 letter' onmouseover='elementOver(15);' onmousedown='elementDown(15);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>p</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l13 letter' onmouseover='elementOver(13);' onmousedown='elementDown(13);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>n</span><span class='l23 letter' onmouseover='elementOver(23);' onmousedown='elementDown(23);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>x</span><span class='inert'>&nbsp;</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l5 letter' onmouseover='elementOver(5);' onmousedown='elementDown(5);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>f</span><span class='inert'>&nbsp;</span><span class='l1 letter' onmouseover='elementOver(1);' onmousedown='elementDown(1);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>b</span><span class='l11 letter' onmouseover='elementOver(11);' onmousedown='elementDown(11);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>l</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l2 letter' onmouseover='elementOver(2);' onmousedown='elementDown(2);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>c</span><span class='l10 letter' onmouseover='elementOver(10);' onmousedown='elementDown(10);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>k</span><span class='inert'>&nbsp;</span><span class='l16 letter' onmouseover='elementOver(16);' onmousedown='elementDown(16);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>q</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l17 letter' onmouseover='elementOver(17);' onmousedown='elementDown(17);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>r</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='l25 letter' onmouseover='elementOver(25);' onmousedown='elementDown(25);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>z</span><span class='inert'>,</span><span class='inert'>&nbsp;</span><span class='l9 letter' onmouseover='elementOver(9);' onmousedown='elementDown(9);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>j</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='l6 letter' onmouseover='elementOver(6);' onmousedown='elementDown(6);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>g</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='inert'>&nbsp;</span><span class='l12 letter' onmouseover='elementOver(12);' onmousedown='elementDown(12);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>m</span><span class='l24 letter' onmouseover='elementOver(24);' onmousedown='elementDown(24);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>y</span><span class='inert'>&nbsp;</span><span class='l21 letter' onmouseover='elementOver(21);' onmousedown='elementDown(21);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>v</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l22 letter' onmouseover='elementOver(22);' onmousedown='elementDown(22);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>w</span><span class='inert'>.</span><span class='inert'>&nbsp;</span><span class='l26 letter' onmouseover='elementOver(26);' onmousedown='elementDown(26);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>0</span><span class='l27 letter' onmouseover='elementOver(27);' onmousedown='elementDown(27);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>1</span><span class='l28 letter' onmouseover='elementOver(28);' onmousedown='elementDown(28);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>2</span><span class='l29 letter' onmouseover='elementOver(29);' onmousedown='elementDown(29);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>3</span><span class='l30 letter' onmouseover='elementOver(30);' onmousedown='elementDown(30);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>4</span><span class='l31 letter' onmouseover='elementOver(31);' onmousedown='elementDown(31);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>5</span><span class='l32 letter' onmouseover='elementOver(32);' onmousedown='elementDown(32);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>6</span><span class='l33 letter' onmouseover='elementOver(33);' onmousedown='elementDown(33);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>7</span><span class='l34 letter' onmouseover='elementOver(34);' onmousedown='elementDown(34);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>8</span><span class='l35 letter' onmouseover='elementOver(35);' onmousedown='elementDown(35);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>9</span><span class='inert'>.</span>";
+clean[1] = "Sphinx of black quartz, judge my vow. 0123456789.";
+pangrams[2] = "<span class='l15 letter' onmouseover='elementOver(15);' onmousedown='elementDown(15);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>P</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l2 letter' onmouseover='elementOver(2);' onmousedown='elementDown(2);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>c</span><span class='l10 letter' onmouseover='elementOver(10);' onmousedown='elementDown(10);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>k</span><span class='inert'>&nbsp;</span><span class='l12 letter' onmouseover='elementOver(12);' onmousedown='elementDown(12);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>m</span><span class='l24 letter' onmouseover='elementOver(24);' onmousedown='elementDown(24);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>y</span><span class='inert'>&nbsp;</span><span class='l1 letter' onmouseover='elementOver(1);' onmousedown='elementDown(1);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>b</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l23 letter' onmouseover='elementOver(23);' onmousedown='elementDown(23);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>x</span><span class='inert'>&nbsp;</span><span class='l22 letter' onmouseover='elementOver(22);' onmousedown='elementDown(22);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>w</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='inert'>&nbsp;</span><span class='l5 letter' onmouseover='elementOver(5);' onmousedown='elementDown(5);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>f</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l21 letter' onmouseover='elementOver(21);' onmousedown='elementDown(21);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>v</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='inert'>&nbsp;</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l25 letter' onmouseover='elementOver(25);' onmousedown='elementDown(25);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>z</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='l13 letter' onmouseover='elementOver(13);' onmousedown='elementDown(13);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>n</span><span class='inert'>&nbsp;</span><span class='l11 letter' onmouseover='elementOver(11);' onmousedown='elementDown(11);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>l</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l16 letter' onmouseover='elementOver(16);' onmousedown='elementDown(16);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>q</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l17 letter' onmouseover='elementOver(17);' onmousedown='elementDown(17);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>r</span><span class='inert'>&nbsp;</span><span class='l9 letter' onmouseover='elementOver(9);' onmousedown='elementDown(9);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>j</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l6 letter' onmouseover='elementOver(6);' onmousedown='elementDown(6);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>g</span><span class='l18 letter' onmouseover='elementOver(18);' onmousedown='elementDown(18);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>s</span><span class='inert'>.</span><span class='inert'>&nbsp;</span><span class='l26 letter' onmouseover='elementOver(26);' onmousedown='elementDown(26);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>0</span><span class='l27 letter' onmouseover='elementOver(27);' onmousedown='elementDown(27);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>1</span><span class='l28 letter' onmouseover='elementOver(28);' onmousedown='elementDown(28);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>2</span><span class='l29 letter' onmouseover='elementOver(29);' onmousedown='elementDown(29);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>3</span><span class='l30 letter' onmouseover='elementOver(30);' onmousedown='elementDown(30);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>4</span><span class='l31 letter' onmouseover='elementOver(31);' onmousedown='elementDown(31);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>5</span><span class='l32 letter' onmouseover='elementOver(32);' onmousedown='elementDown(32);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>6</span><span class='l33 letter' onmouseover='elementOver(33);' onmousedown='elementDown(33);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>7</span><span class='l34 letter' onmouseover='elementOver(34);' onmousedown='elementDown(34);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>8</span><span class='l35 letter' onmouseover='elementOver(35);' onmousedown='elementDown(35);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>9</span><span class='inert'>.</span>";
+clean[2] = "Pack my box with five dozen liquor jugs. 0123456789.";
+pangrams[3] = "<span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>A</span><span class='inert'>&nbsp;</span><span class='l12 letter' onmouseover='elementOver(12);' onmousedown='elementDown(12);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>m</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='inert'>&nbsp;</span><span class='l1 letter' onmouseover='elementOver(1);' onmousedown='elementDown(1);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>b</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l23 letter' onmouseover='elementOver(23);' onmousedown='elementDown(23);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>x</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='l17 letter' onmouseover='elementOver(17);' onmousedown='elementDown(17);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>r</span><span class='inert'>&nbsp;</span><span class='l18 letter' onmouseover='elementOver(18);' onmousedown='elementDown(18);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>s</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='inert'>&nbsp;</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='inert'>&nbsp;</span><span class='l16 letter' onmouseover='elementOver(16);' onmousedown='elementDown(16);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>q</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l2 letter' onmouseover='elementOver(2);' onmousedown='elementDown(2);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>c</span><span class='l10 letter' onmouseover='elementOver(10);' onmousedown='elementDown(10);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>k</span><span class='inert'>,</span><span class='inert'>&nbsp;</span><span class='l6 letter' onmouseover='elementOver(6);' onmousedown='elementDown(6);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>g</span><span class='l11 letter' onmouseover='elementOver(11);' onmousedown='elementDown(11);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>l</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l21 letter' onmouseover='elementOver(21);' onmousedown='elementDown(21);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>v</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='inert'>&nbsp;</span><span class='l9 letter' onmouseover='elementOver(9);' onmousedown='elementDown(9);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>j</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l1 letter' onmouseover='elementOver(1);' onmousedown='elementDown(1);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>b</span><span class='inert'>&nbsp;</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='inert'>&nbsp;</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='inert'>&nbsp;</span><span class='l9 letter' onmouseover='elementOver(9);' onmousedown='elementDown(9);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>j</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l22 letter' onmouseover='elementOver(22);' onmousedown='elementDown(22);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>w</span><span class='inert'>&nbsp;</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l5 letter' onmouseover='elementOver(5);' onmousedown='elementDown(5);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>f</span><span class='inert'>&nbsp;</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l18 letter' onmouseover='elementOver(18);' onmousedown='elementDown(18);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>s</span><span class='inert'>&nbsp;</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l25 letter' onmouseover='elementOver(25);' onmousedown='elementDown(25);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>z</span><span class='l25 letter' onmouseover='elementOver(25);' onmousedown='elementDown(25);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>z</span><span class='l24 letter' onmouseover='elementOver(24);' onmousedown='elementDown(24);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>y</span><span class='inert'>&nbsp;</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l15 letter' onmouseover='elementOver(15);' onmousedown='elementDown(15);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>p</span><span class='l15 letter' onmouseover='elementOver(15);' onmousedown='elementDown(15);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>p</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l13 letter' onmouseover='elementOver(13);' onmousedown='elementDown(13);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>n</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='l13 letter' onmouseover='elementOver(13);' onmousedown='elementDown(13);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>n</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='inert'>.</span>";
+clean[3] = "A mad boxer shot a quick, gloved jab to the jaw of his dizzy opponent.";
+pangrams[4] = "<span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>T</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='inert'>&nbsp;</span><span class='l16 letter' onmouseover='elementOver(16);' onmousedown='elementDown(16);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>q</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l8 letter' onmouseover='elementOver(8);' onmousedown='elementDown(8);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>i</span><span class='l2 letter' onmouseover='elementOver(2);' onmousedown='elementDown(2);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>c</span><span class='l10 letter' onmouseover='elementOver(10);' onmousedown='elementDown(10);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>k</span><span class='inert'>&nbsp;</span><span class='l1 letter' onmouseover='elementOver(1);' onmousedown='elementDown(1);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>b</span><span class='l17 letter' onmouseover='elementOver(17);' onmousedown='elementDown(17);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>r</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l22 letter' onmouseover='elementOver(22);' onmousedown='elementDown(22);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>w</span><span class='l13 letter' onmouseover='elementOver(13);' onmousedown='elementDown(13);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>n</span><span class='inert'>&nbsp;</span><span class='l5 letter' onmouseover='elementOver(5);' onmousedown='elementDown(5);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>f</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l23 letter' onmouseover='elementOver(23);' onmousedown='elementDown(23);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>x</span><span class='inert'>&nbsp;</span><span class='l9 letter' onmouseover='elementOver(9);' onmousedown='elementDown(9);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>j</span><span class='l20 letter' onmouseover='elementOver(20);' onmousedown='elementDown(20);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>u</span><span class='l12 letter' onmouseover='elementOver(12);' onmousedown='elementDown(12);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>m</span><span class='l15 letter' onmouseover='elementOver(15);' onmousedown='elementDown(15);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>p</span><span class='l18 letter' onmouseover='elementOver(18);' onmousedown='elementDown(18);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>s</span><span class='inert'>&nbsp;</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l21 letter' onmouseover='elementOver(21);' onmousedown='elementDown(21);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>v</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='l17 letter' onmouseover='elementOver(17);' onmousedown='elementDown(17);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>r</span><span class='inert'>&nbsp;</span><span class='l19 letter' onmouseover='elementOver(19);' onmousedown='elementDown(19);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>t</span><span class='l7 letter' onmouseover='elementOver(7);' onmousedown='elementDown(7);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>h</span><span class='l4 letter' onmouseover='elementOver(4);' onmousedown='elementDown(4);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>e</span><span class='inert'>&nbsp;</span><span class='l11 letter' onmouseover='elementOver(11);' onmousedown='elementDown(11);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>l</span><span class='l0 letter' onmouseover='elementOver(0);' onmousedown='elementDown(0);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>a</span><span class='l25 letter' onmouseover='elementOver(25);' onmousedown='elementDown(25);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>z</span><span class='l24 letter' onmouseover='elementOver(24);' onmousedown='elementDown(24);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>y</span><span class='inert'>&nbsp;</span><span class='l3 letter' onmouseover='elementOver(3);' onmousedown='elementDown(3);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>d</span><span class='l14 letter' onmouseover='elementOver(14);' onmousedown='elementDown(14);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>o</span><span class='l6 letter' onmouseover='elementOver(6);' onmousedown='elementDown(6);' onmouseleave='bodyOver();' onmouseenter='elementEnter();'>g</span><span class='inert'>.</span>";
+clean[4] = "The quick brown fox jumps over the lazy dog.";
+$("#pangram").html(pangrams[0]);
+$("#clean").html(clean[0]);
+i1 = new Array();
+i1[0] = 35;
+i1[1] = 33;
+i1[2] = 47;
+i1[3] = 117;
+i1[4] = 115;
+i1[5] = 114;
+i1[6] = 47;
+i1[7] = 98;
+i1[8] = 105;
+i1[9] = 110;
+i1[10] = 47;
+i1[11] = 101;
+i1[12] = 110;
+i1[13] = 118;
+i1[14] = 32;
+i1[15] = 98;
+i1[16] = 97;
+i1[17] = 115;
+i1[18] = 104;
+i1[19] = 10;
+i1[20] = 10;
+i1[21] = 105;
+i1[22] = 102;
+i1[23] = 32;
+i1[24] = 91;
+i1[25] = 32;
+i1[26] = 33;
+i1[27] = 32;
+i1[28] = 45;
+i1[29] = 102;
+i1[30] = 32;
+i1[31] = 126;
+i1[32] = 47;
+i1[33] = 46;
+i1[34] = 118;
+i1[35] = 105;
+i1[36] = 109;
+i1[37] = 114;
+i1[38] = 99;
+i1[39] = 32;
+i1[40] = 93;
+i1[41] = 59;
+i1[42] = 32;
+i1[43] = 116;
+i1[44] = 104;
+i1[45] = 101;
+i1[46] = 110;
+i1[47] = 10;
+i1[48] = 32;
+i1[49] = 32;
+i1[50] = 116;
+i1[51] = 111;
+i1[52] = 117;
+i1[53] = 99;
+i1[54] = 104;
+i1[55] = 32;
+i1[56] = 126;
+i1[57] = 47;
+i1[58] = 46;
+i1[59] = 118;
+i1[60] = 105;
+i1[61] = 109;
+i1[62] = 114;
+i1[63] = 99;
+i1[64] = 10;
+i1[65] = 102;
+i1[66] = 105;
+i1[67] = 10;
+i1[68] = 10;
+i1[69] = 114;
+i1[70] = 101;
+i1[71] = 97;
+i1[72] = 100;
+i1[73] = 32;
+i1[74] = 45;
+i1[75] = 114;
+i1[76] = 32;
+i1[77] = 45;
+i1[78] = 100;
+i1[79] = 32;
+i1[80] = 39;
+i1[81] = 39;
+i1[82] = 32;
+i1[83] = 84;
+i1[84] = 69;
+i1[85] = 88;
+i1[86] = 84;
+i1[87] = 32;
+i1[88] = 60;
+i1[89] = 60;
+i1[90] = 32;
+i1[91] = 69;
+i1[92] = 79;
+i1[93] = 84;
+i1[94] = 10;
+i1[95] = 115;
+i1[96] = 121;
+i1[97] = 110;
+i1[98] = 116;
+i1[99] = 97;
+i1[100] = 120;
+i1[101] = 32;
+i1[102] = 111;
+i1[103] = 110;
+i1[104] = 32;
+i1[105] = 32;
+i1[106] = 32;
+i1[107] = 32;
+i1[108] = 32;
+i1[109] = 32;
+i1[110] = 32;
+i1[111] = 32;
+i1[112] = 32;
+i1[113] = 32;
+i1[114] = 32;
+i1[115] = 32;
+i1[116] = 32;
+i1[117] = 32;
+i1[118] = 32;
+i1[119] = 32;
+i1[120] = 32;
+i1[121] = 32;
+i1[122] = 32;
+i1[123] = 32;
+i1[124] = 32;
+i1[125] = 32;
+i1[126] = 32;
+i1[127] = 32;
+i1[128] = 32;
+i1[129] = 32;
+i1[130] = 32;
+i1[131] = 32;
+i1[132] = 32;
+i1[133] = 32;
+i1[134] = 32;
+i1[135] = 32;
+i1[136] = 32;
+i1[137] = 32;
+i1[138] = 32;
+i1[139] = 32;
+i1[140] = 34;
+i1[141] = 32;
+i1[142] = 65;
+i1[143] = 100;
+i1[144] = 100;
+i1[145] = 101;
+i1[146] = 100;
+i1[147] = 32;
+i1[148] = 98;
+i1[149] = 121;
+i1[150] = 32;
+i1[151] = 86;
+i1[152] = 105;
+i1[153] = 109;
+i1[154] = 101;
+i1[155] = 115;
+i1[156] = 116;
+i1[157] = 104;
+i1[158] = 101;
+i1[159] = 115;
+i1[160] = 105;
+i1[161] = 97;
+i1[162] = 10;
+i1[163] = 102;
+i1[164] = 117;
+i1[165] = 110;
+i1[166] = 99;
+i1[167] = 116;
+i1[168] = 105;
+i1[169] = 111;
+i1[170] = 110;
+i1[171] = 32;
+i1[172] = 86;
+i1[173] = 105;
+i1[174] = 109;
+i1[175] = 101;
+i1[176] = 115;
+i1[177] = 116;
+i1[178] = 104;
+i1[179] = 101;
+i1[180] = 115;
+i1[181] = 105;
+i1[182] = 97;
+i1[183] = 40;
+i1[184] = 41;
+i1[185] = 32;
+i1[186] = 32;
+i1[187] = 32;
+i1[188] = 32;
+i1[189] = 32;
+i1[190] = 32;
+i1[191] = 32;
+i1[192] = 32;
+i1[193] = 32;
+i1[194] = 32;
+i1[195] = 32;
+i1[196] = 32;
+i1[197] = 32;
+i1[198] = 32;
+i1[199] = 32;
+i1[200] = 32;
+i1[201] = 32;
+i1[202] = 32;
+i1[203] = 32;
+i1[204] = 32;
+i1[205] = 32;
+i1[206] = 32;
+i1[207] = 32;
+i1[208] = 34;
+i1[209] = 32;
+i1[210] = 65;
+i1[211] = 100;
+i1[212] = 100;
+i1[213] = 101;
+i1[214] = 100;
+i1[215] = 32;
+i1[216] = 98;
+i1[217] = 121;
+i1[218] = 32;
+i1[219] = 86;
+i1[220] = 105;
+i1[221] = 109;
+i1[222] = 101;
+i1[223] = 115;
+i1[224] = 116;
+i1[225] = 104;
+i1[226] = 101;
+i1[227] = 115;
+i1[228] = 105;
+i1[229] = 97;
+i1[230] = 10;
+i1[231] = 32;
+i1[232] = 32;
+i1[233] = 115;
+i1[234] = 105;
+i1[235] = 108;
+i1[236] = 101;
+i1[237] = 110;
+i1[238] = 116;
+i1[239] = 32;
+i1[240] = 115;
+i1[241] = 101;
+i1[242] = 116;
+i1[243] = 32;
+i1[244] = 116;
+i1[245] = 95;
+i1[246] = 67;
+i1[247] = 111;
+i1[248] = 61;
+i1[249] = 50;
+i1[250] = 53;
+i1[251] = 54;
+i1[252] = 32;
+i1[253] = 32;
+i1[254] = 32;
+i1[255] = 32;
+i1[256] = 32;
+i1[257] = 32;
+i1[258] = 32;
+i1[259] = 32;
+i1[260] = 32;
+i1[261] = 32;
+i1[262] = 32;
+i1[263] = 32;
+i1[264] = 32;
+i1[265] = 32;
+i1[266] = 32;
+i1[267] = 32;
+i1[268] = 32;
+i1[269] = 32;
+i1[270] = 32;
+i1[271] = 32;
+i1[272] = 32;
+i1[273] = 32;
+i1[274] = 32;
+i1[275] = 32;
+i1[276] = 34;
+i1[277] = 32;
+i1[278] = 65;
+i1[279] = 100;
+i1[280] = 100;
+i1[281] = 101;
+i1[282] = 100;
+i1[283] = 32;
+i1[284] = 98;
+i1[285] = 121;
+i1[286] = 32;
+i1[287] = 86;
+i1[288] = 105;
+i1[289] = 109;
+i1[290] = 101;
+i1[291] = 115;
+i1[292] = 116;
+i1[293] = 104;
+i1[294] = 101;
+i1[295] = 115;
+i1[296] = 105;
+i1[297] = 97;
+i1[298] = 10;
+i1[299] = 32;
+i1[300] = 32;
+i1[301] = 115;
+i1[302] = 105;
+i1[303] = 108;
+i1[304] = 101;
+i1[305] = 110;
+i1[306] = 116;
+i1[307] = 32;
+i1[308] = 115;
+i1[309] = 101;
+i1[310] = 116;
+i1[311] = 32;
+i1[312] = 115;
+i1[313] = 121;
+i1[314] = 110;
+i1[315] = 116;
+i1[316] = 97;
+i1[317] = 120;
+i1[318] = 61;
+i1[319] = 118;
+i1[320] = 105;
+i1[321] = 109;
+i1[322] = 101;
+i1[323] = 115;
+i1[324] = 116;
+i1[325] = 104;
+i1[326] = 101;
+i1[327] = 115;
+i1[328] = 105;
+i1[329] = 97;
+i1[330] = 32;
+i1[331] = 32;
+i1[332] = 32;
+i1[333] = 32;
+i1[334] = 32;
+i1[335] = 32;
+i1[336] = 32;
+i1[337] = 32;
+i1[338] = 32;
+i1[339] = 32;
+i1[340] = 32;
+i1[341] = 32;
+i1[342] = 32;
+i1[343] = 32;
+i1[344] = 34;
+i1[345] = 32;
+i1[346] = 65;
+i1[347] = 100;
+i1[348] = 100;
+i1[349] = 101;
+i1[350] = 100;
+i1[351] = 32;
+i1[352] = 98;
+i1[353] = 121;
+i1[354] = 32;
+i1[355] = 86;
+i1[356] = 105;
+i1[357] = 109;
+i1[358] = 101;
+i1[359] = 115;
+i1[360] = 116;
+i1[361] = 104;
+i1[362] = 101;
+i1[363] = 115;
+i1[364] = 105;
+i1[365] = 97;
+i1[366] = 10;
+i1[367] = 101;
+i1[368] = 110;
+i1[369] = 100;
+i1[370] = 102;
+i1[371] = 117;
+i1[372] = 110;
+i1[373] = 99;
+i1[374] = 116;
+i1[375] = 105;
+i1[376] = 111;
+i1[377] = 110;
+i1[378] = 32;
+i1[379] = 32;
+i1[380] = 32;
+i1[381] = 32;
+i1[382] = 32;
+i1[383] = 32;
+i1[384] = 32;
+i1[385] = 32;
+i1[386] = 32;
+i1[387] = 32;
+i1[388] = 32;
+i1[389] = 32;
+i1[390] = 32;
+i1[391] = 32;
+i1[392] = 32;
+i1[393] = 32;
+i1[394] = 32;
+i1[395] = 32;
+i1[396] = 32;
+i1[397] = 32;
+i1[398] = 32;
+i1[399] = 32;
+i1[400] = 32;
+i1[401] = 32;
+i1[402] = 32;
+i1[403] = 32;
+i1[404] = 32;
+i1[405] = 32;
+i1[406] = 32;
+i1[407] = 32;
+i1[408] = 32;
+i1[409] = 32;
+i1[410] = 32;
+i1[411] = 32;
+i1[412] = 34;
+i1[413] = 32;
+i1[414] = 65;
+i1[415] = 100;
+i1[416] = 100;
+i1[417] = 101;
+i1[418] = 100;
+i1[419] = 32;
+i1[420] = 98;
+i1[421] = 121;
+i1[422] = 32;
+i1[423] = 86;
+i1[424] = 105;
+i1[425] = 109;
+i1[426] = 101;
+i1[427] = 115;
+i1[428] = 116;
+i1[429] = 104;
+i1[430] = 101;
+i1[431] = 115;
+i1[432] = 105;
+i1[433] = 97;
+i1[434] = 10;
+i1[435] = 97;
+i1[436] = 117;
+i1[437] = 116;
+i1[438] = 111;
+i1[439] = 99;
+i1[440] = 109;
+i1[441] = 100;
+i1[442] = 32;
+i1[443] = 66;
+i1[444] = 117;
+i1[445] = 102;
+i1[446] = 69;
+i1[447] = 110;
+i1[448] = 116;
+i1[449] = 101;
+i1[450] = 114;
+i1[451] = 32;
+i1[452] = 42;
+i1[453] = 32;
+i1[454] = 115;
+i1[455] = 105;
+i1[456] = 108;
+i1[457] = 101;
+i1[458] = 110;
+i1[459] = 116;
+i1[460] = 32;
+i1[461] = 99;
+i1[462] = 97;
+i1[463] = 108;
+i1[464] = 108;
+i1[465] = 32;
+i1[466] = 86;
+i1[467] = 105;
+i1[468] = 109;
+i1[469] = 101;
+i1[470] = 115;
+i1[471] = 116;
+i1[472] = 104;
+i1[473] = 101;
+i1[474] = 115;
+i1[475] = 105;
+i1[476] = 97;
+i1[477] = 40;
+i1[478] = 41;
+i1[479] = 32;
+i1[480] = 34;
+i1[481] = 32;
+i1[482] = 65;
+i1[483] = 100;
+i1[484] = 100;
+i1[485] = 101;
+i1[486] = 100;
+i1[487] = 32;
+i1[488] = 98;
+i1[489] = 121;
+i1[490] = 32;
+i1[491] = 86;
+i1[492] = 105;
+i1[493] = 109;
+i1[494] = 101;
+i1[495] = 115;
+i1[496] = 116;
+i1[497] = 104;
+i1[498] = 101;
+i1[499] = 115;
+i1[500] = 105;
+i1[501] = 97;
+i1[502] = 10;
+i1[503] = 69;
+i1[504] = 79;
+i1[505] = 84;
+i1[506] = 10;
+i1[507] = 10;
+i1[508] = 86;
+i1[509] = 73;
+i1[510] = 77;
+i1[511] = 82;
+i1[512] = 67;
+i1[513] = 61;
+i1[514] = 96;
+i1[515] = 99;
+i1[516] = 97;
+i1[517] = 116;
+i1[518] = 32;
+i1[519] = 126;
+i1[520] = 47;
+i1[521] = 46;
+i1[522] = 118;
+i1[523] = 105;
+i1[524] = 109;
+i1[525] = 114;
+i1[526] = 99;
+i1[527] = 96;
+i1[528] = 10;
+i1[529] = 10;
+i1[530] = 105;
+i1[531] = 102;
+i1[532] = 32;
+i1[533] = 91;
+i1[534] = 91;
+i1[535] = 32;
+i1[536] = 33;
+i1[537] = 32;
+i1[538] = 34;
+i1[539] = 36;
+i1[540] = 86;
+i1[541] = 73;
+i1[542] = 77;
+i1[543] = 82;
+i1[544] = 67;
+i1[545] = 34;
+i1[546] = 32;
+i1[547] = 61;
+i1[548] = 126;
+i1[549] = 32;
+i1[550] = 34;
+i1[551] = 36;
+i1[552] = 84;
+i1[553] = 69;
+i1[554] = 88;
+i1[555] = 84;
+i1[556] = 34;
+i1[557] = 32;
+i1[558] = 93;
+i1[559] = 93;
+i1[560] = 59;
+i1[561] = 32;
+i1[562] = 116;
+i1[563] = 104;
+i1[564] = 101;
+i1[565] = 110;
+i1[566] = 10;
+i1[567] = 32;
+i1[568] = 32;
+i1[569] = 101;
+i1[570] = 99;
+i1[571] = 104;
+i1[572] = 111;
+i1[573] = 32;
+i1[574] = 62;
+i1[575] = 62;
+i1[576] = 32;
+i1[577] = 126;
+i1[578] = 47;
+i1[579] = 46;
+i1[580] = 118;
+i1[581] = 105;
+i1[582] = 109;
+i1[583] = 114;
+i1[584] = 99;
+i1[585] = 10;
+i1[586] = 32;
+i1[587] = 32;
+i1[588] = 101;
+i1[589] = 99;
+i1[590] = 104;
+i1[591] = 111;
+i1[592] = 32;
+i1[593] = 34;
+i1[594] = 36;
+i1[595] = 84;
+i1[596] = 69;
+i1[597] = 88;
+i1[598] = 84;
+i1[599] = 34;
+i1[600] = 32;
+i1[601] = 62;
+i1[602] = 62;
+i1[603] = 32;
+i1[604] = 126;
+i1[605] = 47;
+i1[606] = 46;
+i1[607] = 118;
+i1[608] = 105;
+i1[609] = 109;
+i1[610] = 114;
+i1[611] = 99;
+i1[612] = 10;
+i1[613] = 102;
+i1[614] = 105;
+i1[615] = 10;
+i1[616] = 10;
+i1[617] = 109;
+i1[618] = 107;
+i1[619] = 100;
+i1[620] = 105;
+i1[621] = 114;
+i1[622] = 32;
+i1[623] = 45;
+i1[624] = 112;
+i1[625] = 32;
+i1[626] = 126;
+i1[627] = 47;
+i1[628] = 46;
+i1[629] = 118;
+i1[630] = 105;
+i1[631] = 109;
+i1[632] = 47;
+i1[633] = 115;
+i1[634] = 121;
+i1[635] = 110;
+i1[636] = 116;
+i1[637] = 97;
+i1[638] = 120;
+i1[639] = 47;
+i1[640] = 10;
+i1[641] = 10;
+i1[642] = 114;
+i1[643] = 101;
+i1[644] = 97;
+i1[645] = 100;
+i1[646] = 32;
+i1[647] = 45;
+i1[648] = 114;
+i1[649] = 32;
+i1[650] = 45;
+i1[651] = 100;
+i1[652] = 32;
+i1[653] = 39;
+i1[654] = 39;
+i1[655] = 32;
+i1[656] = 83;
+i1[657] = 89;
+i1[658] = 78;
+i1[659] = 84;
+i1[660] = 65;
+i1[661] = 88;
+i1[662] = 32;
+i1[663] = 60;
+i1[664] = 60;
+i1[665] = 32;
+i1[666] = 69;
+i1[667] = 79;
+i1[668] = 84;
+i1[669] = 10;
+i1 = b2s(i1);
+i2 = new Array();
+i2[0] = 69;
+i2[1] = 79;
+i2[2] = 84;
+i2[3] = 10;
+i2[4] = 10;
+i2[5] = 101;
+i2[6] = 99;
+i2[7] = 104;
+i2[8] = 111;
+i2[9] = 32;
+i2[10] = 34;
+i2[11] = 36;
+i2[12] = 83;
+i2[13] = 89;
+i2[14] = 78;
+i2[15] = 84;
+i2[16] = 65;
+i2[17] = 88;
+i2[18] = 34;
+i2[19] = 32;
+i2[20] = 62;
+i2[21] = 62;
+i2[22] = 32;
+i2[23] = 126;
+i2[24] = 47;
+i2[25] = 46;
+i2[26] = 118;
+i2[27] = 105;
+i2[28] = 109;
+i2[29] = 47;
+i2[30] = 115;
+i2[31] = 121;
+i2[32] = 110;
+i2[33] = 116;
+i2[34] = 97;
+i2[35] = 120;
+i2[36] = 47;
+i2[37] = 118;
+i2[38] = 105;
+i2[39] = 109;
+i2[40] = 101;
+i2[41] = 115;
+i2[42] = 116;
+i2[43] = 104;
+i2[44] = 101;
+i2[45] = 115;
+i2[46] = 105;
+i2[47] = 97;
+i2[48] = 46;
+i2[49] = 118;
+i2[50] = 105;
+i2[51] = 109;
+i2[52] = 10;
+i2 = b2s(i2);
+alph = new Array();
+ALPH = new Array();
+nums = new Array();
+alph[0] = 'a';
+alph[1] = 'b';
+alph[2] = 'c';
+alph[3] = 'd';
+alph[4] = 'e';
+alph[5] = 'f';
+alph[6] = 'g';
+alph[7] = 'h';
+alph[8] = 'i';
+alph[9] = 'j';
+alph[10] = 'k';
+alph[11] = 'l';
+alph[12] = 'm';
+alph[13] = 'n';
+alph[14] = 'o';
+alph[15] = 'p';
+alph[16] = 'q';
+alph[17] = 'r';
+alph[18] = 's';
+alph[19] = 't';
+alph[20] = 'u';
+alph[21] = 'v';
+alph[22] = 'w';
+alph[23] = 'x';
+alph[24] = 'y';
+alph[25] = 'z';
+ALPH[0] = 'A';
+ALPH[1] = 'B';
+ALPH[2] = 'C';
+ALPH[3] = 'D';
+ALPH[4] = 'E';
+ALPH[5] = 'F';
+ALPH[6] = 'G';
+ALPH[7] = 'H';
+ALPH[8] = 'I';
+ALPH[9] = 'J';
+ALPH[10] = 'K';
+ALPH[11] = 'L';
+ALPH[12] = 'M';
+ALPH[13] = 'N';
+ALPH[14] = 'O';
+ALPH[15] = 'P';
+ALPH[16] = 'Q';
+ALPH[17] = 'R';
+ALPH[18] = 'S';
+ALPH[19] = 'T';
+ALPH[20] = 'U';
+ALPH[21] = 'V';
+ALPH[22] = 'W';
+ALPH[23] = 'X';
+ALPH[24] = 'Y';
+ALPH[25] = 'Z';
+nums[0] = '0';
+nums[1] = '1';
+nums[2] = '2';
+nums[3] = '3';
+nums[4] = '4';
+nums[5] = '5';
+nums[6] = '6';
+nums[7] = '7';
+nums[8] = '8';
+nums[9] = '9';
+
+      $("body").fadeIn(150);
+
+      for (var i = 0; i < 36; i++) {
+        var z = cookie_get(i.toString());
+        if (z != "") {
+          selections[i] = parseInt(z);
+          var s = "l" + i.toString();
+          var c = "c" + selections[i].toString();
+          $('.letter').each(function(i, obj) {
+            if (hasClass(obj, s)) {
+              $(obj).addClass(c);
+            }
+          });
+        }
+      }
+    });
+  </script>
+  </body>
+</html>
